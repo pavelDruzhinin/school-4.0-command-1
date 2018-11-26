@@ -1,6 +1,6 @@
 using System;
 
-namespace RecSystemCommand1.Models
+namespace RecSystem.Models
 {
     public class ErrorViewModel
     {

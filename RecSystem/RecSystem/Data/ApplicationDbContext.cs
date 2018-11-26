@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RecSystem.Models;
 
-namespace RecSystemCommand1.Data
+namespace RecSystem.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -12,5 +13,6 @@ namespace RecSystemCommand1.Data
             : base(options)
         {
         }
+        public DbSet<Customer> Customers { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RecSystemCommand1.Data.Migrations
+namespace RecSystem.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RecSystemCommand1.Models;
+using RecSystem.Models;
 
-namespace RecSystemCommand1.Controllers
+namespace RecSystem.Controllers
 {
     public class HomeController : Controller
     {
