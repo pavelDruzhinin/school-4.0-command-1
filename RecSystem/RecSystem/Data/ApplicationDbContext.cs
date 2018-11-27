@@ -14,5 +14,9 @@ namespace RecSystem.Data
         {
         }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<ItemGenres> ItemGenres { get; set; }
+        public DbSet<Genre> Genres { get; set; }
     }
 }

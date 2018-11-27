@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecSystem.Data;
 
 namespace RecSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181127103548_newModels")]
+    partial class newModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,7 +246,9 @@ namespace RecSystem.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerId");
+                    b.Property<int>("CustomerId");
+
+                    b.Property<string>("CustomerId1");
 
                     b.Property<int>("ItemID");
 
@@ -252,7 +256,7 @@ namespace RecSystem.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.HasIndex("ItemID");
 
@@ -332,7 +336,7 @@ namespace RecSystem.Data.Migrations
                 {
                     b.HasOne("RecSystem.Models.Customer", "Customer")
                         .WithMany("Ratings")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId1");
 
                     b.HasOne("RecSystem.Models.Item", "Item")
                         .WithMany("Ratings")
