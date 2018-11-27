@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20181126225010_db.cs" />
+    <Compile Remove="Data\Migrations\20181126225010_db.Designer.cs" />
+    <Compile Remove="Data\Migrations\20181126225450_db1.cs" />
+    <Compile Remove="Data\Migrations\20181126225450_db1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20181126230717_dbnew.cs" />
+    <Compile Remove="Data\Migrations\20181126230717_dbnew.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
