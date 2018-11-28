@@ -33,20 +33,98 @@ namespace RecSystem.Services
 
         private static List<int> GetRecomendations(Dictionary<string, Dictionary<int, int>> dict, string CustomerId)
         {
-            //В словарях: sumScore,sumR,recomendationsDict,recomendationsList 
-            //тип "string" нужно переделать в "int" т.к. будем использовать id сериала
+            Dictionary<int, double> sumScore = new Dictionary<int, double>();
+            Dictionary<int, double> sumR = new Dictionary<int, double>();
 
-            /*добавить код*/
+            Dictionary<int, double> recomendationsDict = new Dictionary<int, double>();
+            List<int> recomendationsList = new List<int>();
 
-            return new List<int>();
+            foreach (var other in dict.Keys)
+            {
+                if (other == CustomerId)
+                {
+                    continue;
+                }
+                double r = CoefR(dict, other, CustomerId);
+
+                if (r > 0)
+                {
+                    foreach (var item in dict[other].Keys)
+                    {
+                        if (!dict[CustomerId].ContainsKey(item))
+                        {
+                            if (sumR.ContainsKey(item))
+                            {
+                                sumR[item] = sumR[item] + r;
+                            }
+                            else
+                            {
+                                sumR[item] = r;
+                            }
+
+                            if (sumScore.ContainsKey(item))
+                            {
+                                sumScore[item] = sumScore[item] + r * dict[other][item];
+                            }
+                            else
+                            {
+                                sumScore[item] = r * dict[other][item];
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var item in sumR.Keys)
+            {
+                recomendationsDict.Add(item, sumScore[item] / sumR[item]);
+            }
+
+
+            foreach (var item in recomendationsDict.OrderByDescending(x => x.Key))
+            {
+                recomendationsList.Add(item.Key);
+            }
+
+            return recomendationsList;
         }
 
         private static double CoefR(Dictionary<string, Dictionary<int, int>> dict, string CustomerId1, string CustomerId2)
         {
-            /*добавить код*/
+            List<int> rating1 = new List<int>();
+            List<int> rating2 = new List<int>();
 
-            return 0.5;
+            double sumRating1 = 0;
+            double sumRating2 = 0;
+            double sumMultiRating = 0;
+            double sumSqRating1 = 0;
+            double sumSqRating2 = 0;
+            double n = 0;
+
+            foreach (var item1 in dict[CustomerId1].Keys)
+            {
+                foreach (var item2 in dict[CustomerId2].Keys)
+                {
+                    if (item1 == item2)
+                    {
+                        sumRating1 = sumRating1 + dict[CustomerId1][item1];
+                        sumRating2 = sumRating2 + dict[CustomerId2][item2];
+                        sumMultiRating = sumMultiRating + dict[CustomerId1][item1] * dict[CustomerId2][item2];
+                        sumSqRating1 = sumSqRating1 + Math.Pow(dict[CustomerId1][item1], 2);
+                        sumSqRating2 = sumSqRating2 + Math.Pow(dict[CustomerId2][item2], 2);
+                        n = n + 1;
+                        break;
+                    }
+                }
+            }
+
+            double Cxy = sumMultiRating - (sumRating1 * sumRating2) / n;
+            double Cx = sumSqRating1 - Math.Pow(sumRating1, 2) / n;
+            double Cy = sumSqRating2 - Math.Pow(sumRating2, 2) / n;
+
+            double R = Cxy / (Math.Sqrt(Cx * Cy));
+
+            return R;
         }
-
     }
 }
