@@ -40,7 +40,7 @@ namespace RecSystem
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<Customer>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddScoped<Services.RecommendService, Services.RecommendService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
