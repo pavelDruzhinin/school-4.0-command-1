@@ -35,7 +35,7 @@ a {
   background-color: rgba(0, 0, 0, 0.63);
   padding: 10px 0;
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .navbar_menu {
@@ -98,7 +98,7 @@ margin-top: 5px;
 }
 
 .movie_info {
-  font-size: 12px;
+  font-size: 18px;
 }
 
 .movie_header {
