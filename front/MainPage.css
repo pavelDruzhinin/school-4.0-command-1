@@ -1,0 +1,126 @@
+body {
+  background-image: url(img/forest-sky-hills-wallpaper.jpg);
+  background-attachment: fixed;
+  color:white;  
+}
+
+/* body * {
+	border: 2px solid #ECD4A0;
+} */
+
+a {
+  text-decoration: none;
+  color:white;  
+}
+
+.header {
+  display: flex;
+}
+
+.logo {
+  margin:auto;
+}
+
+.nav {	
+  font-family: Tahoma;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-around;
+  /* align-content: space-around; */
+}
+
+.navbar {
+  width:90%;
+  height:100%;
+  background-color: rgba(0, 0, 0, 0.63);
+  padding: 10px 0;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.navbar_menu {
+  margin: 1% 1%;
+  list-style: none;
+  display:flex;
+  width: 100%;
+}
+
+.navbar_menu_item {
+ /*  display: inline-block; */
+
+  margin: 0 1.5%;
+}
+/* .navbar_menu_item a {
+  text-decoration: none;
+  color:white;  
+} */
+.wrapper {
+  background-color: rgba(0, 0, 0, 0.53);
+  font-family: Tahoma;
+  display: flex;
+  justify-content: space-around;
+  /* align-content: space-around; */
+  margin: 30px auto;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 100%;
+ /*  opacity: 0.5; */
+}
+
+.autorization_login {
+ /* margin-left: 500px; */
+/*  order: 999; */
+ margin-left: auto;
+ margin-right: 10%;
+}
+
+.movie_container {
+  display: flex;  
+  padding: 16px 0;
+  font-family: sans-serif;
+  font-weight: 700;
+  /* text-transform: uppercase; */
+  text-align: center;
+  vaertical-align: middle;
+  color: white;
+  /* outline: 2px dashed darkgrey; */
+  margin: 20px;
+  border-radius: 10px;
+ /*  border-color: #ECD4A01; */
+  border: 9px solid #ECD4A0;
+  padding-right: 40px;
+}
+
+.movie_image {
+margin-right: 30px;
+margin-left:30px;
+margin-top: 5px;
+}
+
+.movie_info {
+  font-size: 12px;
+}
+
+.movie_header {
+
+}
+
+.movie_extra_info
+{  
+  text-align: left;
+  line-height: 1.8;
+}
+
+.footer {
+  display:flex;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.63);
+  width: 90%;
+  margin: auto;
+  height: 150px;
+  font-size: 20px;
+}
+
+.footer_container {
+	margin:auto;
+}
