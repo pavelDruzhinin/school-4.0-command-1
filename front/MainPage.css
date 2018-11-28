@@ -45,6 +45,11 @@ a {
   width: 100%;
 }
 
+.navbar_menu a:hover {
+	border-bottom: 5px solid #ECD4A0;
+	padding-bottom: 5px;
+}
+
 .navbar_menu_item {
  /*  display: inline-block; */
 
