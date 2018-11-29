@@ -33,9 +33,9 @@ a {
   width:90%;
   height:100%;
   background-color: rgba(0, 0, 0, 0.63);
-  padding: 10px 0;
-  margin-top: 20px;
-  font-size: 24px;
+  padding: 15px 0;
+/*   margin-top: 20px; */
+  font-size: 18px;
 }
 
 .navbar_menu {
@@ -45,9 +45,9 @@ a {
   width: 100%;
 }
 
-.navbar_menu a:hover {
+.navbar_menu a:hover, a:active {
 	border-bottom: 5px solid #ECD4A0;
-	padding-bottom: 5px;
+	padding-bottom: 10px;
 }
 
 .navbar_menu_item {
@@ -65,7 +65,7 @@ a {
   display: flex;
   justify-content: space-around;
   /* align-content: space-around; */
-  margin: 30px auto;
+  margin: 15px auto;
   flex-wrap: wrap;
   width: 90%;
   height: 100%;
@@ -86,7 +86,7 @@ a {
   font-weight: 700;
   /* text-transform: uppercase; */
   text-align: center;
-  vaertical-align: middle;
+  /* vertical-align: middle; */
   color: white;
   /* outline: 2px dashed darkgrey; */
   margin: 20px;
@@ -103,7 +103,7 @@ margin-top: 5px;
 }
 
 .movie_info {
-  font-size: 18px;
+  font-size: 12px;
 }
 
 .movie_header {
@@ -121,8 +121,8 @@ margin-top: 5px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.63);
   width: 90%;
-  margin: auto;
-  height: 150px;
+  margin:0 auto;
+  height: 100%;
   font-size: 20px;
 }
 
