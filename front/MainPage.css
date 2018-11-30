@@ -26,9 +26,9 @@ a {
 }
 
 .navbar {
-  width:90%;
+  width:88.4%;
   background-color: rgba(0, 0, 0, 0.63);
-  padding: 5px 0;
+  padding: 15px 0.8%;
   font-size: 18px;
 }
 
@@ -36,7 +36,7 @@ a {
   list-style: none;
   display:flex;
   width: 100%;
-  vertical-align: middle;
+  margin: auto;
 }
 
 .navbar_menu a:hover, a:active {
@@ -45,9 +45,14 @@ a {
 }
 
 .navbar_menu_item {
- /*  display: inline-block; */
+margin-right: 3%;
+/* margin: 0 1.5%; */
+}
 
-  margin: 0 1.5%;
+.autorization_login {
+ margin-left: auto;
+ margin-right: 6%;
+
 }
 
 .wrapper {
@@ -59,17 +64,12 @@ a {
   flex-wrap: wrap;
   width: 90%;
   height: 97%;
-/*   padding:0 3%; */
+/* padding:0 3%; */
 /*   overflow-y: scroll; */
   padding-top: 1%;
   padding-bottom: 2%;
   justify-content: center;
 
-}
-
-.autorization_login {
- margin-left: auto;
- margin-right: 10%;
 }
 
 .movie_container {
@@ -120,7 +120,4 @@ border-width: 0;
   padding:1% 0 ;
 }
 
-.footer_container {
-
-}
 
