@@ -11,6 +11,7 @@ namespace RecSystem.Models
         public string MovieTitle { get; set; }
         public DateTime ReleaseDate { get; set; }
         public DateTime VideoReleaseDate { get; set; }
+        public string Url { get; set; }
         public List<ItemGenres> ItemGenres { get; set; }
         public List<Rating> Ratings { get; set; }
     }
