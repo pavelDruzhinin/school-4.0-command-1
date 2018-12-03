@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RecSystem.Data;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace RecSystem.Services
 
         public List<int> GetListRecommendIdItemForUserId(string CustomerId)
         {
+            //_db.Database.SetCommandTimeout(200);
             Dictionary<string, Dictionary<int, int>> dictRating = 
                       _db.Ratings.GroupBy(x => x.CustomerId)
                                  .ToDictionary(y => y.Key, z => z.ToDictionary(k => k.ItemID, m => m.Score));

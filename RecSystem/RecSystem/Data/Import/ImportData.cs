@@ -1,29 +1,22 @@
-﻿using RecSystem.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RecSystem.Data;
 using RecSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
-namespace RecSystem.Data
+namespace RecSystem.Data.Import
 {
-    public class TestData
+    public class ImportData
     {
+        /// <summary>
+        /// Метод CreateTestData()
+        /// создает небольшой тестовый набор данных
+        /// </summary>
         public static void CreateTestData(ApplicationDbContext _db)
         {
-            /*
-             * Внимание!!!
-             * Перед заполнением тестовыми данными таблицы:
-             * Users, Items и Rating будут очищены 
-             */
-
-            _db.Ratings.RemoveRange(_db.Ratings);
-            _db.SaveChanges();
-
-            _db.Users.RemoveRange(_db.Users);
-            _db.SaveChanges();
-
-            _db.Items.RemoveRange(_db.Items);
-            _db.SaveChanges();
+            RemoveTable(_db);
 
             List<Customer> CustomersList = new List<Customer>
             {
@@ -96,6 +89,73 @@ namespace RecSystem.Data
             _db.AddRange(RatingsList);
             _db.SaveChanges();
         }
-       
+
+        /// <summary>
+        /// Метод ImportDataFromCSV()
+        /// импортирует в БД данные, загруженные 
+        /// с сайта https://grouplens.org/datasets/movielens/
+        /// 610 users, 9742 movies, 100 836 rating 
+        /// </summary>
+        public static void ImportDataFromCSV(ApplicationDbContext _db)
+        {
+            RemoveTable(_db);
+
+            string path_movies = @"'C:\Users\olga\source\School\school-4.0-command-1\RecSystem\RecSystem\Data\Import\movies.csv'";
+            string path_ratings = @"'C:\Users\olga\source\School\school-4.0-command-1\RecSystem\RecSystem\Data\Import\ratings.csv'";
+
+            var sql_movies_com = $@"IF (OBJECT_ID('tempdb..#csv_temp') IS NOT NULL) DROP TABLE #csv_temp;
+
+                                            CREATE TABLE #csv_temp (
+	                                        movieId int,
+	                                        title nvarchar(max),
+	                                        genres nvarchar(max)
+                                            );
+
+                                            BULK INSERT #csv_temp
+                                            FROM {path_movies}
+                                            WITH (fieldterminator = ',', rowterminator = '\n', FIRSTROW = 2);
+
+                                            SET IDENTITY_INSERT [dbo].Items ON;
+                                            INSERT INTO dbo.Items (ID,MovieTitle,ReleaseDate,VideoReleaseDate,Url)
+                                            SELECT movieId, title, null, null, null
+                                            FROM #csv_temp;
+                                            SET IDENTITY_INSERT dbo.Items OFF;";
+
+            var sql_ratings_com = $@"IF (OBJECT_ID('tempdb..#csv_temp') IS NOT NULL) DROP TABLE #csv_temp;
+
+                                            CREATE TABLE #csv_temp (
+	                                        userId int,
+	                                        movieId int, 
+	                                        rating numeric,
+	                                        timestamp nvarchar(max)
+                                            );
+
+                                            BULK INSERT #csv_temp
+                                            FROM {path_ratings}
+                                            WITH (fieldterminator = ',', rowterminator = '\n', FIRSTROW = 2);
+
+                                            INSERT INTO dbo.AspNetUsers (Id, EmailConfirmed,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,Discriminator)
+                                            SELECT CONVERT(varchar(450), tm.userId), 0,0,0,0,0,'Customer'
+                                            FROM (select distinct userId from #csv_temp) as tm;
+
+                                            INSERT INTO dbo.Ratings (Score, ItemID, CustomerId)
+                                            SELECT rating, movieId, CONVERT(varchar(450), userId)
+                                            FROM #csv_temp;";
+
+            _db.Database.ExecuteSqlCommand(sql_movies_com);
+            _db.Database.ExecuteSqlCommand(sql_ratings_com);
+        }
+
+        public static void RemoveTable(ApplicationDbContext _db)
+        {
+            _db.Ratings.RemoveRange(_db.Ratings);
+            _db.SaveChanges();
+
+            _db.Users.RemoveRange(_db.Users);
+            _db.SaveChanges();
+
+            _db.Items.RemoveRange(_db.Items);
+            _db.SaveChanges();
+        }
     }
 }

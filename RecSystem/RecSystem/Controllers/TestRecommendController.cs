@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecSystem.Data;
+using RecSystem.Data.Import;
 using RecSystem.Models;
 
 namespace RecSystem.Controllers
 {
-    [Route("test")]
+    [Route("rec")]
     public class TestRecommendController : Controller
     {
         private readonly Services.RecommendService _recService;
@@ -22,16 +23,34 @@ namespace RecSystem.Controllers
             _db = db;
         }
 
-        [Route("")]
-        public IActionResult Index()
+        [Route("import")]
+        public IActionResult Import()
         {
-            //Закомментировать вызов CreateTestData, если не нужно заполнять БД тестовыми данными
-            TestData.CreateTestData(_db);
+            ImportData.ImportDataFromCSV(_db);
+            List<Item> DataList = _db.Items.Take(5).ToList();
 
-            List<int> RecommendIdItemList = _recService.GetListRecommendIdItemForUserId("ID-Toby");
+            ViewBag.Message = "Данные успешно загружены";
+            return View("Index", DataList);
+        }
+
+        [Route("test")]
+        public IActionResult CreateTestData()
+        {
+            ImportData.CreateTestData(_db);
+            List<Item> DataList = _db.Items.Take(5).ToList();
+
+            ViewBag.Message = "Данные успешно загружены";
+            return View("Index", DataList);
+        }
+
+        [Route("get/{userId}")]
+        public IActionResult GetRecom(string userId)
+        {
+            List<int> RecommendIdItemList = _recService.GetListRecommendIdItemForUserId(userId);
             List<Item> RecommendFilmList = _db.Items.Where(item => RecommendIdItemList.Contains(item.ID)).ToList();
-            
-            return View(RecommendFilmList);
+
+            ViewBag.Message = "Список рекомендаций";
+            return View("Index", RecommendFilmList);
         }
     }
 }
