@@ -10,6 +10,7 @@ using RecSystem.Models;
 
 namespace RecSystem.Controllers
 {
+    [Route("film")]
     public class SelectedFilmController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +27,8 @@ namespace RecSystem.Controllers
         //}
 
         // GET: SelectedFilm/Details/5
+        [HttpGet]
+        [Route("details/{id:int}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
