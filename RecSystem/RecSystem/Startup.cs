@@ -43,9 +43,9 @@ namespace RecSystem
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
-
+       
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<Customer> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -63,6 +63,16 @@ namespace RecSystem
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            IdentityDataInit.SeedUsers(userManager);
+            AddDataToTable.SeedGenre();
+            AddDataToTable
+            AddDataToTable
+            AddDataToTable
+            AddDataToTable
+
+
+
 
             app.UseMvc(routes =>
             {
