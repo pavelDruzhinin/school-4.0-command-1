@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RecSystem.Data;
 using RecSystem.Models;
 
 namespace RecSystem.Controllers

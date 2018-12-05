@@ -40,7 +40,7 @@ namespace RecSystem
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<Customer>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddScoped<Services.RecommendService, Services.RecommendService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
        
@@ -75,7 +75,7 @@ namespace RecSystem
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Main}/{action=Index}/{id?}");
             });
         }
     }

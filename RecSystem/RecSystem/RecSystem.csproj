@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Sort\**" />
+    <Content Remove="Views\Sort\**" />
+    <EmbeddedResource Remove="Views\Sort\**" />
+    <None Remove="Views\Sort\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\.cs" />
     <Compile Remove="Data\Migrations\20181126225010_db.cs" />
     <Compile Remove="Data\Migrations\20181126225010_db.Designer.cs" />
     <Compile Remove="Data\Migrations\20181126225450_db1.cs" />
@@ -24,6 +32,12 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\TestRecommend\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>
