@@ -64,13 +64,10 @@ namespace RecSystem
 
             app.UseAuthentication();
 
-            IdentityDataInit.SeedUsers(userManager);
+            //IdentityDataInit.SeedUsers(userManager);
             AddDataToTable.SeedGenre();
-            AddDataToTable
-            AddDataToTable
-            AddDataToTable
-            AddDataToTable
-
+            //AddDataToTable.SeedFilms();
+           
 
 
 
