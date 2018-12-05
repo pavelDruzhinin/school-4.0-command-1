@@ -3,14 +3,19 @@ using RecSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using RecSystem.Data;
 
 namespace RecSystem.Models
 {
-    public class AddDataToTable
+    
+    public static class AddDataToTable
+      
     {
+        static ApplicationDbContext _context;
+        
         public static void SeedGenre()
         {
-
+            
             var engine = new FileHelperEngine<GenreTable>();
             var records = engine.ReadFile("genre", 'r');
 
@@ -19,16 +24,19 @@ namespace RecSystem.Models
                 Genre item = new Genre();
                 {
 
-                //item.ID = record.id;
+                item.ID = record.id;
                 item.Name = record.name;
+                
+                
 
-                }
-                Genre.Add(item);
-                SaveChanges();
-
+                }_context.Genres.Add(item);
+                
             }
+            _context.SaveChangesAsync();
 
         }
+
+        
         public static void SeedFilms()
         {
             var  engine = new FileHelperEngine<ItemTable>();
@@ -53,9 +61,16 @@ namespace RecSystem.Models
                             {
                                 itemg.ItemID = str.id;
                                 itemg.GenreID = i;
-                            } 
+                            }
+                            _context.ItemGenres.Add(itemg);
                         }
+
+                        
+
                     }
+                    _context.Items.Add(item);
+                    _context.SaveChangesAsync();
+                }
                 }
 
             }
@@ -102,4 +117,4 @@ namespace RecSystem.Models
         public byte  Western ;
 
     }
-}
+
