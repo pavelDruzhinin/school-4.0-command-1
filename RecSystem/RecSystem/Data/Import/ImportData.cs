@@ -104,17 +104,14 @@ namespace RecSystem.Data.Import
             string path_ratings = @"'C:\Users\olga\source\School\school-4.0-command-1\RecSystem\RecSystem\Data\Import\ratings.csv'";
 
             var sql_movies_com = $@"IF (OBJECT_ID('tempdb..#csv_temp') IS NOT NULL) DROP TABLE #csv_temp;
-
                                             CREATE TABLE #csv_temp (
 	                                        movieId int,
 	                                        title nvarchar(max),
 	                                        genres nvarchar(max)
                                             );
-
                                             BULK INSERT #csv_temp
                                             FROM {path_movies}
                                             WITH (fieldterminator = ',', rowterminator = '\n', FIRSTROW = 2);
-
                                             SET IDENTITY_INSERT [dbo].Items ON;
                                             INSERT INTO dbo.Items (ID,MovieTitle,ReleaseDate,VideoReleaseDate,Url)
                                             SELECT movieId, title, null, null, null
@@ -122,22 +119,18 @@ namespace RecSystem.Data.Import
                                             SET IDENTITY_INSERT dbo.Items OFF;";
 
             var sql_ratings_com = $@"IF (OBJECT_ID('tempdb..#csv_temp') IS NOT NULL) DROP TABLE #csv_temp;
-
                                             CREATE TABLE #csv_temp (
 	                                        userId int,
 	                                        movieId int, 
 	                                        rating numeric,
 	                                        timestamp nvarchar(max)
                                             );
-
                                             BULK INSERT #csv_temp
                                             FROM {path_ratings}
                                             WITH (fieldterminator = ',', rowterminator = '\n', FIRSTROW = 2);
-
                                             INSERT INTO dbo.AspNetUsers (Id, EmailConfirmed,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,Discriminator)
                                             SELECT CONVERT(varchar(450), tm.userId), 0,0,0,0,0,'Customer'
                                             FROM (select distinct userId from #csv_temp) as tm;
-
                                             INSERT INTO dbo.Ratings (Score, ItemID, CustomerId)
                                             SELECT rating, movieId, CONVERT(varchar(450), userId)
                                             FROM #csv_temp;";
