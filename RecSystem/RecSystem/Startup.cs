@@ -41,6 +41,7 @@ namespace RecSystem
             services.AddDefaultIdentity<Customer>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<Services.RecommendService, Services.RecommendService>();
+            services.AddMemoryCache();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
