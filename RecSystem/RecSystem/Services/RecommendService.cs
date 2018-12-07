@@ -25,12 +25,21 @@ namespace RecSystem.Services
 
         public List<int> GetListRecommendIdItemForUserId(string CustomerId)
         {
-            //_db.Database.SetCommandTimeout(200);
-            Dictionary<string, Dictionary<int, int>> dictRating = 
+            List<int> recommendList = new List<int>();
+            var item = _db.Ratings.Where(x => x.CustomerId == CustomerId).FirstOrDefault();
+            if (item == null) return recommendList;
+
+            Dictionary<string, Dictionary<int, int>> dictRating =
                       _db.Ratings.GroupBy(x => x.CustomerId)
                                  .ToDictionary(y => y.Key, z => z.ToDictionary(k => k.ItemID, m => m.Score));
 
-            return GetRecomendations(dictRating, CustomerId);
+            try
+            {
+                recommendList = GetRecomendations(dictRating, CustomerId);
+            }
+            catch { }
+
+            return recommendList;
         }
 
         public List<int> GetListRecommendIdItemForUserIdBD(string CustomerId)
@@ -45,7 +54,7 @@ namespace RecSystem.Services
 
 
         // Версия со словарем
-        private static List<int> GetRecomendations(Dictionary<string, Dictionary<int, int>> dict, string CustomerId, double thresholdScore = 4.0)
+        private static List<int> GetRecomendations(Dictionary<string, Dictionary<int, int>> dict, string CustomerId, double thresholdScore = 4.5)
         {
             Dictionary<int, double> sumScore = new Dictionary<int, double>();
             Dictionary<int, double> sumR = new Dictionary<int, double>();
@@ -90,7 +99,6 @@ namespace RecSystem.Services
                     recomendationsDict.Add(item, score);
                 }
             }
-
 
             foreach (var item in recomendationsDict.OrderByDescending(x => x.Value))
             {
@@ -139,7 +147,7 @@ namespace RecSystem.Services
         }
 
         // Версия без словаря
-        public List<int> GetRecomendationsWithoutDict(string CustomerId, double thresholdScore = 4.0)
+        public List<int> GetRecomendationsWithoutDict(string CustomerId, double thresholdScore = 4.5)
         {
             Dictionary<int, double> sumScore = new Dictionary<int, double>();
             Dictionary<int, double> sumR = new Dictionary<int, double>();

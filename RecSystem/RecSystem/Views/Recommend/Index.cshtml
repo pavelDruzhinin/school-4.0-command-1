@@ -1,0 +1,31 @@
+﻿@using RecSystem.ViewModels
+@model RecommenfFilmViewModel
+
+@{
+    ViewData["Title"] = "Рекомендации";
+}
+
+<h2>@Model.MessageUser</h2>
+
+@if (Model.VisibleTable)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Название фильма                    
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RecommendFilmList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieTitle)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

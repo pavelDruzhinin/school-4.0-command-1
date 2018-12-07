@@ -11,7 +11,7 @@ using RecSystem.Models;
 
 namespace RecSystem.Controllers
 {
-    [Route("rec")]
+    [Route("test")]
     public class TestRecommendController : Controller
     {
         private readonly Services.RecommendService _recService;
