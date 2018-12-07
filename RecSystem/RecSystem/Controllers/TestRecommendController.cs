@@ -46,10 +46,28 @@ namespace RecSystem.Controllers
         [Route("get/{userId}")]
         public IActionResult GetRecom(string userId)
         {
+            System.Diagnostics.Stopwatch sw = new Stopwatch();
+            sw.Start();
             List<int> RecommendIdItemList = _recService.GetListRecommendIdItemForUserId(userId);
             List<Item> RecommendFilmList = _db.Items.Where(item => RecommendIdItemList.Contains(item.ID)).ToList();
+            sw.Stop();
 
             ViewBag.Message = "Список рекомендаций";
+            ViewBag.Time = (sw.ElapsedMilliseconds / 100.0).ToString();
+            return View("Index", RecommendFilmList);
+        }
+
+        [Route("getbd/{userId}")]
+        public IActionResult GetRecomBD(string userId)
+        {
+            System.Diagnostics.Stopwatch sw = new Stopwatch();
+            sw.Start();
+            List<int> RecommendIdItemList = _recService.GetListRecommendIdItemForUserIdBD(userId);
+            List<Item> RecommendFilmList = _db.Items.Where(item => RecommendIdItemList.Contains(item.ID)).ToList();
+            sw.Stop();
+
+            ViewBag.Message = "Список рекомендаций";
+            ViewBag.Time = (sw.ElapsedMilliseconds / 100.0).ToString();
             return View("Index", RecommendFilmList);
         }
     }

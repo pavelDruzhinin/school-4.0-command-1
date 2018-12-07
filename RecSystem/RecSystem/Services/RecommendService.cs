@@ -33,6 +33,16 @@ namespace RecSystem.Services
             return GetRecomendations(dictRating, CustomerId);
         }
 
+        public List<int> GetListRecommendIdItemForUserIdBD(string CustomerId)
+        {
+            //_db.Database.SetCommandTimeout(200);
+            Dictionary<string, Dictionary<int, int>> dictRating =
+                      _db.Ratings.GroupBy(x => x.CustomerId)
+                                 .ToDictionary(y => y.Key, z => z.ToDictionary(k => k.ItemID, m => m.Score));
+
+            return GetRecomendations(dictRating, CustomerId);
+        }
+
 
         // Версия со словарем
         private static List<int> GetRecomendations(Dictionary<string, Dictionary<int, int>> dict, string CustomerId, double thresholdScore = 4.0)
