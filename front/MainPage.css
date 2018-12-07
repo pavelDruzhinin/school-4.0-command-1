@@ -67,7 +67,7 @@ margin: 0 1.5%;
 }
 
 .content {
-  background-color: rgba(0, 255, 0, 0.53);
+  background-color: rgba(0, 0, 0, 0.53);
   font-family: Tahoma;
   display: flex;
   margin: 15px auto;
@@ -116,7 +116,7 @@ border-width: 0;
   line-height: 1.8;
 }
 .footer {
-background-color: rgba(0, 255, 0, 0.63);
+background-color: rgba(0, 0, 0, 0.63);
 width: 90%;
 font-size: 20px;
 margin:auto;
