@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "SelectedFilm";
+}
+
+    <link href="../css/SelectedFilm.css" rel="stylesheet" type="text/css" />
+
+	<div class="content"> 		
+		 <div class = "movie_container">
+		 	<div class="movie_image"><a href="#">
+		 		<img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width= "200" height= "280"></a>
+				<div class="current_score">Текущая оценка: @Viewbag.Score</div>
+		 		<div class="score">
+		 			<form method="post">
+			 			  <p>Оцените фильм:</p>
+					 	  <input class="score_choice" type="radio" name="score" value="1">1
+						  <input class="score_choice" type="radio" name="score" value="2">2
+						  <input class="score_choice" type="radio" name="score" value="3">3
+						  <input class="score_choice" type="radio" name="score" value="4">4
+						  <input class="score_choice" type="radio" name="score" value="5">5 
+						  <div>
+						  	<button class="submit_button"type="submit">Подтвердите свой выбор</button>
+						  </div>
+					</form>
+		 		</div>
+		 	</div>
+		 	<div class= "movie_info">
+		 		<div class= "movie_header"><a href=""><h2>@ViewBag.MovieTitle</h2></a></div>
+		 		<div class= "movie_extra_info"><p>@ViewBag.ReleaseDate</p></div>		 		
+		 		<p>Описание:</p>
+		 		<p>@Viewbag.MovieDescription</p>
+		 	</div>		 				 	
+		 </div>		 
+	 </div>
