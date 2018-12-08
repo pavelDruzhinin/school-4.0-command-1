@@ -1,0 +1,55 @@
+﻿@model IEnumerable<RecSystem.Models.Item>
+@{
+    ViewData["Title"] = "MainPage";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Styles {
+    <link href="@Url.Content("~/Styles/view_specific_style.css")" rel="stylesheet" type="text/css" />
+}
+
+<!--wrapper begin-->
+<div class="wrapper">
+
+    @RenderBody()
+
+
+
+    <div class="content">
+
+        @foreach (var m in Model)
+        {
+            <div class="movie_container">
+                <div class="movie_image">
+                    <a href="#">
+                        <img src="@m.MovieImage" alt="movie_img" width="130" height="180">
+                    </a>
+                </div>
+                <div class="movie_info">
+                    <div class="movie_header"><h2>@m.MovieTitle</h2></div>
+                    <div class="movie_extra_info">
+                        <p>
+                            @m.ReleaseDate<br>
+                            @m.Genre
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>
+<!--wrapper end-->
+
+@RenderBody()
+
+@*<footer>@RenderSection("Footer")</footer>*@
+
+@*<footer class="footer">
+        <div class="footer_container">&copy; Hackathon Team1 2018</div>
+    </footer>*@

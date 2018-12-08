@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RecSystem.Models.Item>
+@{
+    ViewData["Title"] = "Marked";
+}
+
+
+<!--wrapper begin-->
+
+
+<div class="wrapper">
+
+    @RenderBody
+    @*<div class="header">
+            <div class="logo">
+                <img src="img/logo.png" alt="logo_img">
+            </div>
+        </div>*@
+
+    @*<nav class="nav">
+            <div class="navbar">
+                <ul class="navbar_menu">
+                    <li class="navbar_menu_item"><a href="#">Главная</a></li>
+                    <li class="navbar_menu_item"><a href="#">Оцененные</a></li>
+                    <li class="navbar_menu_item"><a href="#">Рекомендации</a></li>
+                    <li class="autorization_login"><a href="#">Логин</a></li>
+                </ul>
+            </div>
+        </nav>*@
+
+
+    <div class="content">
+
+        @foreach (var m in Model)
+        {
+            <div class="movie_container">
+                <div class="movie_image">
+                    <a href="#">
+                        <img src="@m.MovieImage" alt="movie_img" width="130" height="180">
+                    </a>
+                </div>
+                <div class="movie_info">
+                    <div class="movie_header"><h2>@m.MovieTitle</h2></div>
+                    <div class="movie_extra_info">
+                        <p>
+                            @m.ReleaseDate<br>
+                        @m.Genre
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+
+    </div>
+
+</div>
+<!--wrapper end-->
+@*<footer class="footer">
+        <div class="footer_container">&copy; Hackathon Team1 2018</div>
+    </footer>*@
+

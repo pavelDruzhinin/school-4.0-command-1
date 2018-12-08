@@ -1,0 +1,91 @@
+﻿html {
+    height: 100%;
+}
+
+body {
+    background-image: url(img/background.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.wrapper {
+    flex-grow: 1;
+}
+
+.header {
+    display: flex;
+}
+
+.logo {
+    margin: auto;
+}
+
+.nav {
+    font-family: Tahoma;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar {
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.63);
+    font-size: 18px;
+}
+
+.navbar_menu {
+    list-style: none;
+    display: flex;
+}
+
+    .navbar_menu a:hover, a:active {
+        border-bottom: 5px solid #ECD4A0;
+        padding-bottom: 5px;
+    }
+
+.navbar_menu_item {
+    margin: 0 1.5%;
+    /* margin-right: 3%; */
+}
+
+.autorization_login {
+    margin-left: auto;
+    margin-right: 80px;
+}
+
+.content {
+    background-color: rgba(0, 0, 0, 0.53);
+    font-family: Tahoma;
+    display: flex;
+    margin: 15px auto;
+    flex-wrap: wrap;
+    width: 90%;
+    padding-bottom: 2%;
+    justify-content: center;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.63);
+    width: 90%;
+    font-size: 20px;
+    margin: auto;
+    display: flex;
+    flex-grow: 0;
+    justify-content: center;
+    align-items: center; /* центрирование по вертикали */
+    min-height: 30px;
+}
+
+.footer_container {
+}
