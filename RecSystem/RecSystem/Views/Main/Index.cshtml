@@ -1,50 +1,87 @@
-﻿@model IEnumerable<RecSystem.Models.Item>
+﻿@*@model IEnumerable<RecSystem.Models.Item>
 
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MovieTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VideoReleaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Url)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MovieTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VideoReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Url)
+                </td>
+                <td>
+
+                    <a asp-controller="Film" asp-action="Details" asp-route-id="@item.ID">Details</a> |
+
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@
+
+@model IEnumerable<RecSystem.Models.Item>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MovieTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VideoReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Url)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovieTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VideoReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Url)
-            </td>
-            <td>
-                
-                <a asp-controller="Film" asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <link href="../css/MainPage.css" rel="stylesheet" type="text/css" />
+
+
+
+    <div class="content">
+
+        @foreach (var m in Model)
+        {
+            <div class="movie_container">
+                <div class="movie_image">
+                    <a href="#">
+                        <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="130" height="180">
+                    </a>
+                </div>
+                <div class="movie_info">
+                    <div class="movie_header"><h2>@m.MovieTitle</h2></div>
+                    <div class="movie_extra_info">
+                        <p>
+                            @m.ReleaseDate<br>
+                            Test
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+
