@@ -26,13 +26,14 @@ namespace RecSystem.Controllers
             _cache = memoryCache;
         }
 
-        [Route("get")]
+        [HttpGet]
+        [Route("GetRecomget")]
         [Authorize]
-        public IActionResult GetRecom()
+        public IActionResult GetRecom(String newId)
         {
             if (!_cache.TryGetValue("RecommendIdItemList", out List<int> RecommendIdItemList))
             {
-                RecommendIdItemList = _recService.GetListRecommendIdItemForUserId("id-user");
+                RecommendIdItemList = _recService.GetListRecommendIdItemForUserId("50");
                 _cache.Set("RecommendIdItemList", RecommendIdItemList, TimeSpan.FromMinutes(10));
             }
                         
