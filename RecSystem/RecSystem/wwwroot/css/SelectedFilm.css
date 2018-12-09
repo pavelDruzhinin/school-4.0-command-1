@@ -1,0 +1,56 @@
+.movie_container {
+    display: flex;
+    font-family: sans-serif;
+    color: white;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 2%;
+    box-sizing: border-box;
+}
+
+.current_score {
+    margin: 10px 20px;
+}
+
+.score {
+    border-radius: 10px;
+    border: 3px solid #ECD4A0;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.score_choice {
+    display: inline-block;
+}
+
+.movie_image {
+    margin-right: 3%;
+    margin-left: 5%;
+    margin-top: 5px;
+    padding: 16px 0;
+}
+
+    .movie_image a:active {
+        border-width: 0;
+    }
+
+.movie_info {
+    font-size: 17px;
+    padding: 6px 0;
+}
+
+.movie_header {
+}
+
+.submit_button {
+    margin-top: 15px;
+    font-size: 16px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.63);
+}
+
+.movie_extra_info {
+    text-align: left;
+    line-height: 1.8;
+}
