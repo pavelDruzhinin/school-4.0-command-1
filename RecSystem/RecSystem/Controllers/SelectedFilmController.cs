@@ -2,155 +2,85 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using RecSystem.Data;
 using RecSystem.Models;
+using RecSystem.ViewModels;
 
 namespace RecSystem.Controllers
 {
-    [Route("film")]
+    [Route("Film")]
     public class SelectedFilmController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
+        private UserManager<Customer> _userManager { get; set; }
+        private readonly IMemoryCache _cache;
 
-        public SelectedFilmController(ApplicationDbContext context)
+        public SelectedFilmController(ApplicationDbContext db, UserManager<Customer> userManager,
+            IMemoryCache memoryCache)
         {
-            _context = context;
+            _db = db;
+            _userManager = userManager;
+            _cache = memoryCache;
         }
 
-        //// GET: SelectedFilm
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Items.ToListAsync());
-        //}
-
-        // GET: SelectedFilm/Details/5
         [HttpGet]
-        [Route("details/{id:int}")]
-        public async Task<IActionResult> Details(int? id)
+        [Route("Details/{id:int}")]
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var item = await _db.Items.FirstOrDefaultAsync(m => m.ID == id);
             if (item == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            string userId = _userManager.GetUserId(User);
+            var rating = await _db.Ratings.FirstOrDefaultAsync(x => x.CustomerId == userId && x.ItemID == id);
+
+            FilmUserViewModel filmViewModel = new FilmUserViewModel
+            {
+                ID = item.ID,
+                MovieTitle = item.MovieTitle,
+                ReleaseDate = item.ReleaseDate,
+                VideoReleaseDate = item.ReleaseDate,
+                Url = item.Url,
+                ScoreUser = (rating != null) ? rating.Score : 0,
+                IdUser = userId
+            };
+
+            return View(filmViewModel);
         }
 
-        //// GET: SelectedFilm/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        [Route("AddScore")]
+        public async Task<IActionResult> AddScore(FilmUserViewModel filmViewModel)
+        {
+            var rating = await _db.Ratings.FirstOrDefaultAsync(x => x.CustomerId == filmViewModel.IdUser && x.ItemID == filmViewModel.ID);
 
-        //// POST: SelectedFilm/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("ID,MovieTitle,ReleaseDate,VideoReleaseDate,Url")] Item item)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(item);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(item);
-        //}
+            if (rating == null)
+            {
+                rating = new Rating
+                {
+                    CustomerId = filmViewModel.IdUser,
+                    ItemID = filmViewModel.ID,
+                    Score = filmViewModel.ScoreUser
+                };
+                _db.Ratings.Add(rating);
+                _db.SaveChanges();
+            }
+            else
+            {
+                rating.Score = filmViewModel.ScoreUser;
+                _db.SaveChanges();
+            }
+            _cache.Remove("RecommendIdItemList");
 
-        //// GET: SelectedFilm/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return RedirectToAction("Details", new { id = filmViewModel.ID });
+        }
 
-        //    var item = await _context.Items.FindAsync(id);
-        //    if (item == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(item);
-        //}
-
-        //// POST: SelectedFilm/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("ID,MovieTitle,ReleaseDate,VideoReleaseDate,Url")] Item item)
-        //{
-        //    if (id != item.ID)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(item);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!ItemExists(item.ID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(item);
-        //}
-
-        //// GET: SelectedFilm/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var item = await _context.Items
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (item == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(item);
-        //}
-
-        //// POST: SelectedFilm/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var item = await _context.Items.FindAsync(id);
-        //    _context.Items.Remove(item);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool ItemExists(int id)
-        //{
-        //    return _context.Items.Any(e => e.ID == id);
-        //}
     }
 }

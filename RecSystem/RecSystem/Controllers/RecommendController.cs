@@ -18,28 +18,30 @@ namespace RecSystem.Controllers
         private readonly Services.RecommendService _recService;
         public ApplicationDbContext _db;
         private readonly IMemoryCache _cache;
+        private UserManager<Customer> _userManager { get; set; }
 
-        public RecommendController(Services.RecommendService recService, ApplicationDbContext db, IMemoryCache memoryCache)
+        public RecommendController(Services.RecommendService recService, ApplicationDbContext db, 
+            IMemoryCache memoryCache, UserManager<Customer> userManager)
         {
             _recService = recService;
             _db = db;
             _cache = memoryCache;
+            _userManager = userManager;
         }
 
         [HttpGet]
         [Route("GetRecomget")]
         [Authorize]
-        public IActionResult GetRecom(String newId)
+        public IActionResult GetRecom(string userId)
         {
             if (!_cache.TryGetValue("RecommendIdItemList", out List<int> RecommendIdItemList))
             {
-                RecommendIdItemList = _recService.GetListRecommendIdItemForUserId("50");
+                RecommendIdItemList = _recService.GetListRecommendIdItemForUserId(userId);
                 _cache.Set("RecommendIdItemList", RecommendIdItemList, TimeSpan.FromMinutes(10));
             }
-                        
             List<Item> RecommendFilmList = _db.Items.Where(item => RecommendIdItemList.Contains(item.ID)).ToList();
 
-            return View("Index", new RecommenfFilmViewModel(RecommendFilmList));
+            return View("Index", new RecommendFilmsViewModel(RecommendFilmList));
         }
 
     }

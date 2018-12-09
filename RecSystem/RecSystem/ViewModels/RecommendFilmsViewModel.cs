@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace RecSystem.ViewModels
 {
-    public class RecommenfFilmViewModel
+    public class RecommendFilmsViewModel
     {
         public List<Item> RecommendFilmList { get; set; }
         public string MessageUser { get; set; }
         public bool VisibleTable { get; set; }
 
-        public RecommenfFilmViewModel() { }
-        public RecommenfFilmViewModel(List<Item> recommendIdItemList)
+        public RecommendFilmsViewModel() { }
+        public RecommendFilmsViewModel(List<Item> recommendIdItemList)
         {
             RecommendFilmList = recommendIdItemList;
             if (recommendIdItemList.Count() == 0)
