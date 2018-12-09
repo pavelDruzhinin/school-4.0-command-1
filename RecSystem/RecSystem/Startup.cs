@@ -40,12 +40,13 @@ namespace RecSystem
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<Customer>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddTransient<SeedData>();
             services.AddScoped<Services.RecommendService, Services.RecommendService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<Customer> userManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<Customer> userManager, SeedData sd )
         {
             if (env.IsDevelopment())
             {
@@ -65,8 +66,8 @@ namespace RecSystem
             app.UseAuthentication();
 
             //IdentityDataInit.SeedUsers(userManager);
-            //AddDataToTable.SeedGenre();
-            AddDataToTable.SeedFilms();
+            //sd.SeedGenre();
+            sd.SeedFilms();
            
 
 
