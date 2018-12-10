@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using FileHelpers;
 using System;
+using System.Collections.Generic;
 
 namespace RecSystem.Models
 {
     public class IdentityDataInit
     {
-         public static void SeedUsers(UserManager<Customer> userManager)
+         public List<string> SeedUsers(UserManager<Customer> userManager)
         {
+            List<string> usersId = new List<string>();
             try
             {
                 var engine = new FileHelperEngine<Cust>();
                 var records = engine.ReadFile("new_csv.csv",'r');
+                            
 
                 foreach (var record in records)
                 {
@@ -25,7 +28,7 @@ namespace RecSystem.Models
                         IdentityResult result = userManager.CreateAsync
                         (user, "Kc84XgQs!").Result;
 
-
+                        usersId.Add(userManager.GetUserIdAsync(user).Result);
                     }
 
                 }
@@ -35,7 +38,7 @@ namespace RecSystem.Models
             {
                
             }
-
+            return usersId;
         }
     }
     [IgnoreEmptyLines]

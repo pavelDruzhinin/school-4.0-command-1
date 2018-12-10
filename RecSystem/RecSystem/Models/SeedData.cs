@@ -75,7 +75,7 @@ namespace RecSystem.Models
                             {
                                
                                 itemg.GenreID = i+1;
-                                itemg.ItemID = str.id;
+                                itemg.ItemID = item.ID;
                             }
                             _context.ItemGenres.Add(itemg);
                         }
@@ -89,6 +89,30 @@ namespace RecSystem.Models
         _context.SaveChanges();
         }
         
+        }
+
+        public void SeedRaitings(List <string> usersId)
+        {
+            //user id | item id | rating | timestamp. time stamps are unix seconds since 1 / 1 / 1970 UTC
+            var engine = new FileHelperEngine<RatingTable>();
+            var ratingStr = engine.ReadFile("u.data", 'r');
+            for (var i = 0; i < usersId.Count; i++) {
+
+                foreach (var str in ratingStr)
+                {
+                    Rating rating = new Rating();
+                    {
+
+                        rating.Score = str.rating;
+                        rating.CustomerId = usersId[i];
+                        rating.ItemID = str.item_id;
+                    }
+                    _context.Ratings.Add(rating);
+
+                }
+            }
+            _context.SaveChanges();
+
         }
     }
 
@@ -130,5 +154,14 @@ namespace RecSystem.Models
         public int War;
         public int  Western ;
 
+    }
+    [IgnoreEmptyLines]
+    [DelimitedRecord("\t")]
+    public class RatingTable
+    {
+        public int user_id;
+        public int item_id;
+        public int rating;
+        public int timestamp;
     }
 
