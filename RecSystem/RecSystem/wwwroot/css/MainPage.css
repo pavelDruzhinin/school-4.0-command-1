@@ -34,3 +34,21 @@
     text-align: left;
     line-height: 1.8;
 }
+
+.movie_pagin_up {
+    display: flex;
+    font-family: sans-serif;
+    color: white;
+    margin-right: 4%;
+    width: 44%;
+}
+
+.movie_pagin_down {
+    display: flex;
+    font-family: sans-serif;
+    color: white;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+

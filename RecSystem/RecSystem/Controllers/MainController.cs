@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RecSystem.Data;
 using RecSystem.Models;
+using RecSystem.ViewModels;
 
 namespace RecSystem.Controllers
 {
@@ -20,10 +21,21 @@ namespace RecSystem.Controllers
             _context = context;
         }
 
-        // GET: Main
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _context.Items.ToListAsync());
+            int pageSize = 30; 
+
+            IQueryable<Item> source = _context.Items;
+            var count = await source.CountAsync();
+            var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                Items = items
+            };
+            return View(viewModel);
         }
 
         /*// GET: Main/Details/5
