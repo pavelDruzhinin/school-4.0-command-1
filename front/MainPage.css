@@ -15,8 +15,8 @@ body {
 }
 
 a {
+  color:white;
   text-decoration: none;
-  color:white;  
 }
 
 .wrapper {
@@ -50,10 +50,17 @@ a {
   display:flex;
 }
 
-.navbar_menu a:hover, a:active {
-  border-bottom: 5px solid #ECD4A0;
-  padding-bottom: 5px;
+.navbar_menu a:focus{
+border-bottom: 5px solid #ECD4A0;
+padding-bottom: 5px;
+/* background-color:green; */
 }
+
+/* .navbar_menu a:active{
+border-bottom: 5px solid #ECD4A0;
+padding-bottom: 5px;
+background-color:green;
+} */
 
 .navbar_menu_item {
 margin: 0 1.5%;
@@ -84,7 +91,7 @@ margin: 0 1.5%;
   color: white;
   border-radius: 10px;
   border: 9px solid #ECD4A0;  
-  margin-top: 1%;
+  margin-top: 20px;
   margin-left: 1%;
   margin-right: 1%;
   box-sizing: border-box;
@@ -120,7 +127,6 @@ background-color: rgba(0, 0, 0, 0.63);
 width: 90%;
 font-size: 20px;
 margin:auto;
-
 display: flex;
 flex-grow: 0;
 justify-content: center;
