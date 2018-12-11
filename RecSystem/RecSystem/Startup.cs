@@ -38,6 +38,7 @@ namespace RecSystem
 
             using (var client = new SshClient("cobalt.locum.ru", "hosting_danteatom1c", "VITzBRbbp"))
             {
+                client.Connect();
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseMySQL(
                         Configuration.GetConnectionString("DefaultConnection")));
