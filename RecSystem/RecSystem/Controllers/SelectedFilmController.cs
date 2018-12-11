@@ -49,7 +49,8 @@ namespace RecSystem.Controllers
                 VideoReleaseDate = item.ReleaseDate,
                 Url = item.Url,
                 ScoreUser = (rating != null) ? rating.Score : 0,
-                IdUser = userId
+                IdUser = userId,
+                ScoreAverage = _db.Ratings.Where(x => x.ItemID == id).Average(x => x.Score)
             };
 
             return View(filmViewModel);
