@@ -24,17 +24,17 @@ namespace GetAdditionalInformation
             string addPartPath;
             string posterPath = "//body/div/div/div/div/div/div/a/img";
             web = new HtmlWeb();
-            foreach(var i in _context.Items)
+            foreach (var i in _context.Items)
             {
                 addPartPath = i.MovieTitle;
                 addPartPath = Regex.Replace(addPartPath, @"\b(\s{1}([(0-9)]{6}))$", "");
                 addPartPath = Regex.Replace(addPartPath, @"\s", "_");
-                
+
                 try
                 {
-                    htmlDoc = web.Load(urlBase+addPartPath);
+                    htmlDoc = web.Load(urlBase + addPartPath);
                 }
-                catch(System.Exception ex)
+                catch (System.Exception ex)
                 {
                     Console.WriteLine(urlBase + addPartPath + "\n " + "Некорректный адресс, возникла ошибка: " + ex.Message);
                     Console.ReadLine();

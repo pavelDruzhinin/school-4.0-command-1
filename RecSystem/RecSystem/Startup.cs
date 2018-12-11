@@ -13,6 +13,7 @@ using RecSystem.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RecSystem.Models;
+using Renci.SshNet;
 
 namespace RecSystem
 {
@@ -35,13 +36,18 @@ namespace RecSystem
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<Customer>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            using (var client = new SshClient("cobalt.locum.ru", "hosting_danteatom1c", "VITzBRbbp"))
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseMySQL(
+                        Configuration.GetConnectionString("DefaultConnection")));
+                services.AddDefaultIdentity<Customer>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }
+
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,7 +74,7 @@ namespace RecSystem
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Viewed}/{action=Index}/{id?}");
             });
         }
     }

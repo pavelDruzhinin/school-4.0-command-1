@@ -12,7 +12,7 @@ namespace GetAdditionalInformation
         {
             var serviceProvider = new ServiceCollection()
                .AddLogging()
-               .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=RecSystemDb;Trusted_Connection=True;MultipleActiveResultSets=true"), ServiceLifetime.Transient)
+               .AddDbContext<ApplicationDbContext>(options => options.UseMySQL("Server=mysql5.locum.ru;Database=danteato_RecSy37;User ID=danteato_RecSy37;Password=hackaton2018;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;MultipleActiveResultSets=True"), ServiceLifetime.Transient)
                .AddTransient<AdditionalInfo>()
                .BuildServiceProvider();
 

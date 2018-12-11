@@ -1,0 +1,42 @@
+﻿body 
+{
+    background-image: url("~/images/background1.jpg");
+    background-attachment: fixed;
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+.vWrapper
+{
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+}
+.header
+{
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+.navbar
+{
+    grid-row-start: 3;
+    grid-row-end: 4;
+    display:grid;
+    grid-template-columns: repeat(8, 1fr);
+    background-color: rgba(0,0,0, 0.63);
+}
+.menu
+{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.content
+{
+    grid-row-start: 4;
+    grid-row-end: 9;
+    display:grid;
+    background-color: rgba(0,0,0, 0.53);
+}
+.footer
+{
+    grid-row-start: 10;
+    grid-row-end: 11;
+}

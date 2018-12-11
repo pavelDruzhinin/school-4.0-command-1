@@ -11,6 +11,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/viewedMain.css"/>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -20,7 +21,42 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="vWrapper">
+        <div class="navbar">
+            <div class="menu">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <ul>
+                        <li>Главная</li>
+                        <li>Просмотренные</li>
+                        <li>Рекомендации</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul>
+                        <li>Главная</li>
+                    </ul>
+                }
+            </div>
+            <div class="authorize">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
+        <div class="footer">
+            <p>&copy; 2018 - RecSystem</p>
+        </div>
+    </div>
+
+
+
+
+
+
+    @*<nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -55,17 +91,17 @@
                     <partial name="_LoginPartial" />
                 </div>}
         </div>
-    </nav>
+    </nav>*@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    @*<div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; 2018 - RecSystem</p>
         </footer>
-    </div>
+    </div>*@
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
