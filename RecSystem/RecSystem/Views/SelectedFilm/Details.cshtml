@@ -10,7 +10,7 @@
     <div class="movie_container">
         <div class="movie_image">
             <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="200" height="280">
-            <div class="current_score">Средняя оценка: ScoreAverage</div>
+            <div class="current_score">Средняя оценка: @Html.DisplayFor(model => model.ScoreAverage)</div>
             <div class="current_score">Ваша оценка: @Html.DisplayFor(model => model.ScoreUser)</div>
             <div class="score">
                 <form method="post" asp-action="AddScore">

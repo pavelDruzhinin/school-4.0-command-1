@@ -40,6 +40,7 @@ namespace RecSystem.Controllers
 
             string userId = _userManager.GetUserId(User);
             var rating = await _db.Ratings.FirstOrDefaultAsync(x => x.CustomerId == userId && x.ItemID == id);
+            var ratingAllUser = _db.Ratings.Where(x => x.ItemID == id).ToList();
 
             FilmUserViewModel filmViewModel = new FilmUserViewModel
             {
@@ -49,7 +50,8 @@ namespace RecSystem.Controllers
                 VideoReleaseDate = item.ReleaseDate,
                 Url = item.Url,
                 ScoreUser = (rating != null) ? rating.Score : 0,
-                IdUser = userId
+                IdUser = userId,
+                ScoreAverage = (ratingAllUser.Count() != 0) ? Math.Round(ratingAllUser.Average(x => x.Score), 1) : 0
             };
 
             return View(filmViewModel);
