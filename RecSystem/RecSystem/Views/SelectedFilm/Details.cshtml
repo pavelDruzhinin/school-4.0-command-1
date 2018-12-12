@@ -1,42 +1,39 @@
-﻿@model RecSystem.Models.Item
+﻿@model RecSystem.ViewModels.FilmUserViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Html.DisplayFor(model => model.MovieTitle);
 }
 
-<h2>Details</h2>
+<link href="~/css/SelectedFilm.css" rel="stylesheet" type="text/css" />
 
-<div>
-    <h4>Item</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MovieTitle)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MovieTitle)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.VideoReleaseDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.VideoReleaseDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Url)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Url)
-        </dd>
-    </dl>
+<div class="content" style="justify-content:flex-start">
+    <div class="movie_container">
+        <div class="movie_image">
+            <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="200" height="280">
+            <div class="current_score">Средняя оценка: ScoreAverage</div>
+            <div class="current_score">Ваша оценка: @Html.DisplayFor(model => model.ScoreUser)</div>
+            <div class="score">
+                <form method="post" asp-action="AddScore">
+                    <p>Оцените фильм:</p>
+                    @Html.HiddenFor(model => model.ID)
+                    @Html.HiddenFor(model => model.IdUser)
+                    <input class="score_choice" type="radio" name="ScoreUser" value="1">1
+                    <input class="score_choice" type="radio" name="ScoreUser" value="2">2
+                    <input class="score_choice" type="radio" name="ScoreUser" value="3">3
+                    <input class="score_choice" type="radio" name="ScoreUser" value="4">4
+                    <input class="score_choice" type="radio" name="ScoreUser" value="5">5
+                    <div>
+                        <button class="submit_button" type="submit">Оценить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="movie_info">
+            <div class="movie_header"><h2>@Html.DisplayFor(model => model.MovieTitle)</h2></div>
+            <div class="movie_extra_info"><p>Дата выхода: @Html.DisplayFor(model => model.ReleaseDate)</p></div>
+            <p>Описание</p>
+            <p>Длинное описание</p>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
