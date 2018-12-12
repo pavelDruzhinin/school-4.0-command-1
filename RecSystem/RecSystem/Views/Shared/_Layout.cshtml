@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RecSystem</title>
+    <title>@ViewData["Title"]</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/css/site.css" />
@@ -26,20 +26,21 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <ul class="navbar_menu">
-                        <li class="navbar_menu_item"><a href="@Url.Action("Index", "Main")">Главная</a></li>
-                        <li class="navbar_menu_item"><a href="#">Оцененные</a></li>
-                        <li class="navbar_menu_item"><a href="@Url.Action("GetRecomget", "rec", new { userId= UserManager.GetUserAsync(User).Result.Id})">Рекомендации</a></li>
+                        <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Main")">Главная</a></li>
+                        <li class="navbar_menu_item"><a class="navbar_item_link" href="#">Оцененные</a></li>
+                        <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("GetRecomget", "rec", new { userId= UserManager.GetUserAsync(User).Result.Id})">Рекомендации</a></li>
                         <li class="autorization_login">
-                            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.Name!</a>
+                            @*<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">*@@UserManager.GetUserAsync(User).Result.Name@*</a>*@
                         </li>
+                        <li class="logout"><a asp-area="Identity" asp-page="/Account/Logout">Выход</a></li>
                     </ul>
                 }
                 else
                 {
-                    <ul>
-                        <li class="navbar_menu_item"><a href="@Url.Action("Index", "Main")">Главная</a></li>
-                        @*<li class="autorization_login"><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>*@
-                        <li class="autorization_login"><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                    <ul class="navbar_menu">
+                        <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Main")">Главная</a></li>
+                        <li class="autorization_login"><a asp-area="Identity" asp-page="/Account/Login">Вход</a></li>
+                        <li class="registration"><a asp-area="Identity" asp-page="/Account/Register">Регистрация</a></li>
                     </ul>
 
                 }
@@ -47,14 +48,16 @@
         </nav>
         @*<partial name="_CookieConsentPartial" />*@
         @RenderBody()
-        </div>
-        <footer class="footer">
-            <div class="footer_container">&copy; Hackathon Team1 2018</div>
-        </footer>
+    </div>
+    <footer class="footer">
+        <div class="footer_container">&copy; Hackathon Team1 2018</div>
+    </footer>
 
-        
+    <script src="@Url.Content("~/js/site.js")" type="text/javascript"></script>
 
-        @RenderSection("Scripts", required: false)
+
+
+    @RenderSection("Scripts", required: false)
 </body>
 
 
