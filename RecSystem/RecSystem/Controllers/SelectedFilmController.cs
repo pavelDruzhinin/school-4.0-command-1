@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -30,6 +31,7 @@ namespace RecSystem.Controllers
 
         [HttpGet]
         [Route("Details/{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             var item = await _db.Items.FirstOrDefaultAsync(m => m.ID == id);
@@ -59,6 +61,7 @@ namespace RecSystem.Controllers
 
         [HttpPost]
         [Route("AddScore")]
+        [Authorize]
         public async Task<IActionResult> AddScore(FilmUserViewModel filmViewModel)
         {
             var rating = await _db.Ratings.FirstOrDefaultAsync(x => x.CustomerId == filmViewModel.IdUser && x.ItemID == filmViewModel.ID);
