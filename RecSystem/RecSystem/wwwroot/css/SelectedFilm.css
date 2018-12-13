@@ -31,9 +31,9 @@
     padding: 16px 0;
 }
 
-    .movie_image a:active {
-        border-width: 0;
-    }
+.movie_image a:active {
+    border-width: 0;
+}
 
 .movie_info {
     font-size: 17px;
