@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using RecSystem.Data;
+using System.Linq;
 
 namespace RecSystem.Models
 {
-    
+
     public class SeedData
-      
+
     {
         private readonly ApplicationDbContext _context;
 
@@ -17,32 +18,35 @@ namespace RecSystem.Models
         {
             _context = context;
         }
-    
-        
+
+
         public void SeedGenre()
         {
-            
+            if (_context.Genres.Any())
+                return;
             var engine = new FileHelperEngine<GenreTable>();
-            var records = engine.ReadFile("genre", 'r');
+            var records = engine.ReadFile("genre");
 
             foreach (var record in records)
             {
                 Genre item = new Genre();
                 {
-                item.Name = record.name;                
+                    item.Name = record.name;
                 }
-            _context.Genres.Add(item);
-                
+                _context.Genres.Add(item);
+
             }
             _context.SaveChanges();
 
         }
 
-        
+
         public void SeedFilms()
         {
-            var  engine = new FileHelperEngine<ItemTable>();
-            var filmsStr = engine.ReadFile("u.item",'r');
+            if (_context.Items.Any())
+                return;
+            var engine = new FileHelperEngine<ItemTable>();
+            var filmsStr = engine.ReadFile("u.item");
             foreach (var str in filmsStr)
             {
                 List<int> value = new List<int>() {str.Unknown, str.Action, str.Adventure, str.Animation, str.Children, str.Comedy, str.Crime,
@@ -66,46 +70,49 @@ namespace RecSystem.Models
                     _context.SaveChanges();
 
                     int i = 0;
-                    while( i != 19)
+                    while (i != 19)
                     {
                         if (value[i] == 1)
-                       
+
                         {
                             ItemGenres itemg = new ItemGenres();
                             {
-                               
-                                itemg.GenreID = i+1;
+
+                                itemg.GenreID = i + 1;
                                 itemg.ItemID = item.ID;
                             }
                             _context.ItemGenres.Add(itemg);
                         }
                         i++;
-                                           
+
                     }
-                    
+
                 }
-            
-                
-        _context.SaveChanges();
-        }
-        
+
+
+                _context.SaveChanges();
+            }
+
         }
 
-        public void SeedRaitings(List <string> usersId)
+       
+        public void SeedRaitings(List<string> usersId)
         {
+            if (_context.Ratings.Any())
+                return;
             //user id | item id | rating | timestamp. time stamps are unix seconds since 1 / 1 / 1970 UTC
             var engine = new FileHelperEngine<RatingTable>();
-            var ratingStr = engine.ReadFile("u.data", 'r');
-            for (var i = 0; i < usersId.Count; i++) {
-
-                foreach (var str in ratingStr)
+            var ratingStr = engine.ReadFile("u.data");
+            for (var i = 0; i < usersId.Count; i++)
+            {
+                foreach (var str in ratingStr.Where(x => x.user_id == i).ToList())
                 {
                     Rating rating = new Rating();
                     {
-
-                        rating.Score = str.rating;
-                        rating.CustomerId = usersId[i];
-                        rating.ItemID = str.item_id;
+                        rating.Score = str.score;
+                        rating.CustomerId = usersId[i - 1];
+                        //rating.ItemID = str.item_id;
+                        rating.ItemID = _context.Items.First(c => c.ID == str.item_id).ID;
                     }
                     _context.Ratings.Add(rating);
 
@@ -114,7 +121,9 @@ namespace RecSystem.Models
             _context.SaveChanges();
 
         }
+
     }
+
 
 }
 
@@ -161,7 +170,7 @@ namespace RecSystem.Models
     {
         public int user_id;
         public int item_id;
-        public int rating;
+        public int score;
         public int timestamp;
     }
 

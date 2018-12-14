@@ -67,7 +67,7 @@ namespace RecSystem
             app.UseAuthentication();
 
            
-            List <string> usersId = dataInit.SeedUsers(userManager);
+            var usersId = dataInit.SeedUsers(userManager);
             sd.SeedGenre();
             sd.SeedFilms();
             sd.SeedRaitings(usersId);

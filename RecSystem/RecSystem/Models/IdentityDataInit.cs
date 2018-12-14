@@ -13,7 +13,7 @@ namespace RecSystem.Models
             try
             {
                 var engine = new FileHelperEngine<Cust>();
-                var records = engine.ReadFile("new_csv.csv",'r');
+                var records = engine.ReadFile("new_csv.csv");
                             
 
                 foreach (var record in records)
@@ -21,6 +21,7 @@ namespace RecSystem.Models
                     if (userManager.FindByNameAsync(record.name).Result == null)
                     {
                         Customer user = new Customer();
+                        
                         user.UserName = record.name;
                         user.Name = record.name;
                         user.Email = record.email;
@@ -30,6 +31,8 @@ namespace RecSystem.Models
 
                         usersId.Add(userManager.GetUserIdAsync(user).Result);
                     }
+                    string ud = userManager.FindByNameAsync(record.name).Result.Id;
+                    usersId.Add(ud); 
 
                 }
 

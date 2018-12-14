@@ -14,5 +14,10 @@ namespace RecSystem.Models
         public string Url { get; set; }
         public List<ItemGenres> ItemGenres { get; set; }
         public List<Rating> Ratings { get; set; }
+        public Item()
+        {
+            ItemGenres = new List<ItemGenres>();
+            Ratings = new List<Rating>();
+        }
     }
 }
