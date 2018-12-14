@@ -31,9 +31,10 @@ namespace RecSystem.Models
 
                         usersId.Add(userManager.GetUserIdAsync(user).Result);
                     }
+                    else {
                     string ud = userManager.FindByNameAsync(record.name).Result.Id;
                     usersId.Add(ud); 
-
+                     }
                 }
 
             }

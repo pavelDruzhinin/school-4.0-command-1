@@ -53,46 +53,41 @@ namespace RecSystem.Models
                     str.Documentary, str.Drama, str.Fantasy, str.FilmNoir, str.Horror, str.Musical, str.Mystery,
                     str.Romancepublic, str.SciFi, str.Thriller, str.War, str.Western };
 
-                Item item = new Item();
+                var item = new Item();
+
+                item.MovieTitle = str.title;
+                item.Url = str.IMDb_URL;
+
+                if (DateTime.TryParse(str.releaseDate, out var release))
                 {
-                    //item.ID = str.id;
-                    item.MovieTitle = str.title;
-                    item.Url = str.IMDb_URL;
-                    if (DateTime.TryParse(str.releaseDate, out var release))
-                    {
-                        item.ReleaseDate = release;
-                    }
-                    if (DateTime.TryParse(str.videoReleaseDate, out var videoRelease))
-                    {
-                        item.VideoReleaseDate = videoRelease;
-                    }
-                    _context.Items.Add(item);
-                    _context.SaveChanges();
-
-                    int i = 0;
-                    while (i != 19)
-                    {
-                        if (value[i] == 1)
-
-                        {
-                            ItemGenres itemg = new ItemGenres();
-                            {
-
-                                itemg.GenreID = i + 1;
-                                itemg.ItemID = item.ID;
-                            }
-                            _context.ItemGenres.Add(itemg);
-                        }
-                        i++;
-
-                    }
-
+                    item.ReleaseDate = release;
                 }
 
+                if (DateTime.TryParse(str.videoReleaseDate, out var videoRelease))
+                {
+                    item.VideoReleaseDate = videoRelease;
+                }
 
-                _context.SaveChanges();
+                int i = 0;
+                while (i != 19)
+                {
+                    if (value[i] == 1)
+                    {
+                        ItemGenres itemg = new ItemGenres()
+                        {
+                            GenreID = i + 1
+                        };
+
+                        item.ItemGenres.Add(itemg);
+                    }
+                    i++;
+                }
+                _context.Items.Add(item);
             }
 
+            _context.SaveChanges();
+
+           
         }
 
        
@@ -103,7 +98,7 @@ namespace RecSystem.Models
             //user id | item id | rating | timestamp. time stamps are unix seconds since 1 / 1 / 1970 UTC
             var engine = new FileHelperEngine<RatingTable>();
             var ratingStr = engine.ReadFile("u.data");
-            for (var i = 0; i < usersId.Count; i++)
+            for (var i = 1; i <= usersId.Count; i++)
             {
                 foreach (var str in ratingStr.Where(x => x.user_id == i).ToList())
                 {
@@ -111,8 +106,7 @@ namespace RecSystem.Models
                     {
                         rating.Score = str.score;
                         rating.CustomerId = usersId[i - 1];
-                        //rating.ItemID = str.item_id;
-                        rating.ItemID = _context.Items.First(c => c.ID == str.item_id).ID;
+                        rating.ItemID = str.item_id;
                     }
                     _context.Ratings.Add(rating);
 
