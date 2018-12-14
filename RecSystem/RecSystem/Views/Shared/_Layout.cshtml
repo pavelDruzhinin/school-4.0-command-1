@@ -26,15 +26,22 @@
             <div class="navbar">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                <ul class="navbar_menu">
-                    <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Main")">Главная</a></li>
-                    <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Private")">Оцененные</a></li>
-                    <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("GetRecomget", "rec", new { userId= UserManager.GetUserAsync(User).Result.Id})">Рекомендации</a></li>
-                    <li class="autorization_login">
-                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result.Name</a>
-                    </li>
-                    <li class="logout"><a asp-area="Identity" asp-page="/Account/Logout">Выход</a></li>
-                </ul>
+                    <form asp-area="Identity" asp-page="/Account/Logout"
+                          asp-route-returnUrl="@Url.Action("Index", "Main")"
+                          method="post"
+                          id="logoutForm" class="navbar-right">
+                        <ul class="navbar_menu">
+                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Main")">Главная</a></li>
+                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Private")">Оцененные</a></li>
+                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("GetRecomget", "rec", new { userId= UserManager.GetUserAsync(User).Result.Id})">Рекомендации</a></li>
+                            <li class="autorization_login">
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result.Name</a>
+                            </li>
+                            <li class="logout">
+                                <button type="submit" class="btn-link">Выход</button>
+                            </li>
+                        </ul>
+                    </form>
                 }
                 else
                 {
@@ -44,6 +51,7 @@
                         <li class="registration"><a asp-area="Identity" asp-page="/Account/Register">Регистрация</a></li>
                     </ul>
                 }
+
             </div>
         </nav>
         @*<partial name="_CookieConsentPartial" />*@
