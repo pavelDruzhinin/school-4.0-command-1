@@ -1,0 +1,38 @@
+﻿@using RecSystem.ViewModels
+@model RecommendFilmsViewModel
+
+@{
+    ViewData["Title"] = "Рекомендации";
+}
+<link href="~/css/MainPage.css" rel="stylesheet" type="text/css" />
+
+<h2>@Model.MessageUser</h2>
+
+@if (Model.VisibleTable)
+{
+    <div class="content">
+
+        @foreach (var m in Model.RecommendFilmList)
+        {
+            <div class="movie_container">
+                <div class="movie_image">
+                    <a asp-controller="Film" asp-action="Details" asp-route-id="@m.ID">
+                        <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="130" height="180">
+                    </a>
+                </div>
+                <div class="movie_info">
+                    <div class="movie_header">
+                        <h2>
+                            <a asp-controller="Film" asp-action="Details" asp-route-id="@m.ID">@m.MovieTitle</a>
+                        </h2>
+                    </div>
+                    <div class="movie_extra_info">
+                        <p>
+                            @m.ReleaseDate<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

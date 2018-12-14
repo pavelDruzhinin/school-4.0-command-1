@@ -1,0 +1,52 @@
+﻿.movie_container {
+    display: flex;
+    width: 44%;
+    font-family: sans-serif;
+    color: white;
+    border-radius: 10px;
+    border: 9px solid #ECD4A0;
+    margin-top: 20px;
+    margin-left: 1%;
+    margin-right: 1%;
+    box-sizing: border-box;
+}
+
+.movie_image {
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 5px;
+    padding: 16px 0;
+}
+
+.movie_image a:active {
+    border-width: 0;
+}
+
+.movie_info {
+    font-size: 12px;
+    padding: 6px 0;
+}
+
+.movie_header {
+}
+
+.movie_extra_info {
+    text-align: left;
+    line-height: 1.8;
+}
+
+.movie_pagin_up {
+    display: flex;
+    font-family: sans-serif;
+    color: white;
+    margin-right: 4%;
+    width: 44%;
+}
+
+.movie_pagin_down {
+    display: flex;
+    font-family: sans-serif;
+    color: white;
+    margin-left: 1%;
+    margin-right: 1%;
+}

@@ -43,6 +43,7 @@ namespace RecSystem
             services.AddTransient<SeedData>();
             services.AddTransient<IdentityDataInit>();
             services.AddScoped<Services.RecommendService, Services.RecommendService>();
+            services.AddMemoryCache();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
        
