@@ -21,21 +21,50 @@ namespace RecSystem.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(int page = 1)
+        public  async Task<IActionResult> Index(int page = 1, string searchString = null)
+
         {
-            int pageSize = 30; 
-
             IQueryable<Item> source = _context.Items;
-            var count = await source.CountAsync();
-            var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            int pageSize = 30;
+            var movies = from m in _context.Items
+                         select m;
 
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel
+            if (!String.IsNullOrEmpty(searchString))
             {
-                PageViewModel = pageViewModel,
-                Items = items
-            };
-            return View(viewModel);
+                movies = movies.Where(s => s.MovieTitle.Contains(searchString));
+
+                var c = await movies.CountAsync();
+                var part = await movies.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+                PageViewModel pageViewMode = new PageViewModel(c, page, pageSize);
+                IndexViewModel view = new IndexViewModel
+                {
+                    PageViewModel = pageViewMode,
+                    Items = part
+                };
+                return View(view);
+            }
+            else
+            {
+                var count = await source.CountAsync();
+                var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+                PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+                IndexViewModel viewModel = new IndexViewModel
+                {
+                    PageViewModel = pageViewModel,
+                    Items = items
+                };
+                return View(viewModel);
+            }
+
+            
+           
+        }
+        public IActionResult Top()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
         }
 
     }

@@ -4,7 +4,12 @@
     ViewData["Title"] = "Main";
 }
 <link href="~/css/MainPage.css" rel="stylesheet" type="text/css" />
-
+<form asp-controller="Main" asp-action="Index" class="movie_container">
+    <p>
+        Title: <input type="text" class="movie_extra_info" name="SearchString">
+        <input class="submit_button" type="submit" value="Search" />
+    </p>
+</form>
 <div class="content">
 
     @foreach (var m in Model.Items)
