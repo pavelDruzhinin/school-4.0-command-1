@@ -29,34 +29,34 @@
             </div>
         </div>
     }
-    
-        <div class="movie_pagin_up">
-            @if (Model.PageViewModel.HasPreviousPage)
-            {
-                <a asp-action="Index"
-                   asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
-                   class="btn btn-default btn">
-                    <i class="glyphicon glyphicon-chevron-left"></i>
-                    <h2>
-                        Назад
-                    </h2>
-                </a>
-            }
-        </div>
-        <div class="movie_pagin_down">
-            @if (Model.PageViewModel.HasNextPage)
-            {
-                <a asp-action="Index"
-                   asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
-                   class="btn btn-default btn">
-                    <h2>
-                        Далее
-                    </h2>
-                    <i class="glyphicon glyphicon-chevron-right"></i>
-                </a>
-            }
-        </div>
+</div>
 
+<div class="pagination">
+    <div class="movie_pagin_up">
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+               class="btn btn-default btn">
+                <h2>
+                    < Назад
+                </h2>
+            </a>
+        }
+    </div>
+    <div class="movie_pagin_down">
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+               class="btn btn-default btn">
+                <h2>
+                    Далее >
+                </h2>
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }
+    </div>
 </div>
 
 

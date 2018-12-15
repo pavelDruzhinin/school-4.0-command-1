@@ -27,15 +27,23 @@
     padding: 6px 0;
 }
 
-.movie_header {
-}
-
 .movie_extra_info {
     text-align: left;
     line-height: 1.8;
 }
 
-.movie_pagin_up {
+.pagination {
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+}
+
+.movie_pagin_down, .movie_pagin_up {
+    margin:0 25px;
+}
+
+
+/*.movie_pagin_up {
     display: flex;
     font-family: sans-serif;
     color: white;
@@ -49,4 +57,6 @@
     color: white;
     margin-left: 1%;
     margin-right: 1%;
-}
+}*/
+
+

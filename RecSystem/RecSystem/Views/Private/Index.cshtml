@@ -1,9 +1,39 @@
 ﻿@model IEnumerable<RecSystem.Models.Rating>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Оцененные";
 }
-<h2>Ваш список оцененных фильмов</h2>
-<div class="md-t-1">
+
+<link href="~/css/MainPage.css" rel="stylesheet" type="text/css" />
+<link href="~/css/scored.css" rel="stylesheet" type="text/css" />
+
+<div class="content">
+
+    @foreach (var item in Model)
+    {
+        <div class="movie_container">
+            <div class="movie_image">
+                <a asp-controller="Film" asp-action="Details" asp-route-id="@item.ID"> </a>
+                    <a><img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="130" height="180"> </a>
+                    <div class="current_score">Ваша оценка: @Html.DisplayFor(modelItem => item.Score)</div>
+            </div>
+            <div class="movie_info">
+                <div class="movie_header">
+                    <h2>
+                        @Html.DisplayFor(modelItem => item.Item.MovieTitle)
+                    </h2>
+                </div>
+                <div class="movie_extra_info">
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Item.ReleaseDate)<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@*<div class="md-t-1">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -25,6 +55,9 @@
             }
         </tbody>
     </table>
-</div>
+</div>*@
 
 
+@*<a asp-controller="Film" asp-action="Details" asp-route-id="@m.ID">*@
+
+@*<a asp-controller="Film" asp-action="Details" asp-route-id="@m.ID">@m.MovieTitle</a>*@

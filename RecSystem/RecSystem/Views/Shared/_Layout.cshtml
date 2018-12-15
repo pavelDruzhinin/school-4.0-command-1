@@ -35,7 +35,7 @@
                             <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Private")">Оцененные</a></li>
                             <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("GetRecomget", "rec", new { userId= UserManager.GetUserAsync(User).Result.Id})">Рекомендации</a></li>
                             <li class="autorization_login">
-                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result.Name</a>
+                                @*<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">*@@UserManager.GetUserAsync(User).Result.Name@*</a>*@
                             </li>
                             <li class="logout">
                                 <button type="submit" class="btn-link">Выход</button>
