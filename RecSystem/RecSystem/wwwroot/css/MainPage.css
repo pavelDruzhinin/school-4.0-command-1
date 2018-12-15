@@ -1,7 +1,7 @@
 ﻿.movie_container {
     display: flex;
     width: 44%;
-    font-family: sans-serif;
+    /*font-family: sans-serif;*/
     color: white;
     border-radius: 10px;
     border: 9px solid #ECD4A0;
@@ -33,9 +33,10 @@
 }
 
 .pagination {
-    display:flex;
+    font-family: Tahoma;
+    display: flex;
     flex-direction: row;
-    justify-content:center;
+    justify-content: center;
 }
 
 .movie_pagin_down, .movie_pagin_up {

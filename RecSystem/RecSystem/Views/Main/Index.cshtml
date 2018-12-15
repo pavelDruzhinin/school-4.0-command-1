@@ -36,11 +36,10 @@
         @if (Model.PageViewModel.HasPreviousPage)
         {
             <a asp-action="Index"
-               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
-               class="btn btn-default btn">
-                <h2>
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)">               
+                <h3>
                     < Назад
-                </h2>
+                </h3>
             </a>
         }
     </div>
@@ -48,12 +47,10 @@
         @if (Model.PageViewModel.HasNextPage)
         {
             <a asp-action="Index"
-               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
-               class="btn btn-default btn">
-                <h2>
+               asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                <h3>
                     Далее >
-                </h2>
-                <i class="glyphicon glyphicon-chevron-right"></i>
+                </h3>
             </a>
         }
     </div>

@@ -12,14 +12,16 @@
     {
         <div class="movie_container">
             <div class="movie_image">
-                <a asp-controller="Film" asp-action="Details" asp-route-id="@item.ID"> </a>
-                    <a><img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="130" height="180"> </a>
+                <a asp-controller="Film" asp-action="Details" asp-route-id="@item.ID">
+                    <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="130" height="180"> </a>
                     <div class="current_score">Ваша оценка: @Html.DisplayFor(modelItem => item.Score)</div>
             </div>
             <div class="movie_info">
                 <div class="movie_header">
                     <h2>
-                        @Html.DisplayFor(modelItem => item.Item.MovieTitle)
+                        <a asp-controller="Film" asp-action="Details" asp-route-id="@item.ID">
+                            @Html.DisplayFor(modelItem => item.Item.MovieTitle)
+                         </a>
                     </h2>
                 </div>
                 <div class="movie_extra_info">
