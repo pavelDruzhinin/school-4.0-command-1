@@ -1,4 +1,4 @@
-.movie_container {
+﻿.movie_container {
     display: flex;
     font-family: sans-serif;
     color: white;
@@ -26,21 +26,20 @@
 
 .movie_image {
     margin-right: 3%;
-    margin-left: 5%;
+    margin-left: 3%;
     margin-top: 5px;
     padding: 16px 0;
 }
 
-    .movie_image a:active {
-        border-width: 0;
-    }
-
-.movie_info {
-    font-size: 17px;
-    padding: 6px 0;
+.movie_image a:active {
+    border-width: 0;
 }
 
-.movie_header {
+.movie_info {
+    display: flex;
+    flex-direction: column;
+    font-size: 17px;
+    padding: 6px 0;
 }
 
 .submit_button {
@@ -52,5 +51,8 @@
 
 .movie_extra_info {
     text-align: left;
-    line-height: 1.8;
+}
+
+.movie_description {
+    line-height: 1.2;
 }

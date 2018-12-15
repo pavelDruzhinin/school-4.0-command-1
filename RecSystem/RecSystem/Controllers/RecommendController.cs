@@ -12,7 +12,6 @@ using RecSystem.ViewModels;
 
 namespace RecSystem.Controllers
 {
-    [Route("rec")]
     public class RecommendController : Controller
     {
         private readonly Services.RecommendService _recService;
@@ -30,18 +29,18 @@ namespace RecSystem.Controllers
         }
 
         [HttpGet]
-        [Route("GetRecomget")]
         [Authorize]
-        public IActionResult GetRecom(string userId)
+        public IActionResult Index()
         {
-            if (!_cache.TryGetValue("RecommendIdItemList", out List<int> RecommendIdItemList))
+            string userId = _userManager.GetUserId(User);
+            if (!_cache.TryGetValue(String.Concat("RecommendIdItemList", userId), out List<int> RecommendIdItemList))
             {
                 RecommendIdItemList = _recService.GetListRecommendIdItemForUserId(userId);
-                _cache.Set("RecommendIdItemList", RecommendIdItemList, TimeSpan.FromMinutes(10));
+                _cache.Set(String.Concat("RecommendIdItemList", userId), RecommendIdItemList, TimeSpan.FromMinutes(10));
             }
             List<Item> RecommendFilmList = _db.Items.Where(item => RecommendIdItemList.Contains(item.ID)).ToList();
 
-            return View("Index", new RecommendFilmsViewModel(RecommendFilmList));
+            return View(new RecommendFilmsViewModel(RecommendFilmList));
         }
 
     }

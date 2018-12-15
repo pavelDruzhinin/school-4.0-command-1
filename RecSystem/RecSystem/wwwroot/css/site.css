@@ -49,18 +49,20 @@ a {
     display: flex;
 }
 
-    .navbar_menu a:hover, a:active {
-        border-bottom: 5px solid #ECD4A0;
-        padding-bottom: 5px;
-    }
-
 .navbar_menu_item {
     margin: 0 1.5%;
-    /* margin-right: 3%; */
 }
 
 .autorization_login {
     margin-left: auto;
+    margin-right: 30px;
+}
+
+.registration {
+    margin-right: 70px;
+}
+
+.logout {
     margin-right: 80px;
 }
 
@@ -87,5 +89,15 @@ a {
     min-height: 30px;
 }
 
-.footer_container {
+.btn-link {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: white;
+    text-decoration: none;
+    font-family: Tahoma;
+    font-weight: bold;
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -30,6 +31,7 @@ namespace RecSystem.Controllers
 
         [HttpGet]
         [Route("Details/{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             var item = await _db.Items.FirstOrDefaultAsync(m => m.ID == id);
@@ -40,6 +42,7 @@ namespace RecSystem.Controllers
 
             string userId = _userManager.GetUserId(User);
             var rating = await _db.Ratings.FirstOrDefaultAsync(x => x.CustomerId == userId && x.ItemID == id);
+            var ratingAllUser = _db.Ratings.Where(x => x.ItemID == id).ToList();
 
             FilmUserViewModel filmViewModel = new FilmUserViewModel
             {
@@ -49,7 +52,8 @@ namespace RecSystem.Controllers
                 VideoReleaseDate = item.ReleaseDate,
                 Url = item.Url,
                 ScoreUser = (rating != null) ? rating.Score : 0,
-                IdUser = userId
+                IdUser = userId,
+                ScoreAverage = (ratingAllUser.Count() != 0) ? Math.Round(ratingAllUser.Average(x => x.Score), 1) : 0
             };
 
             return View(filmViewModel);
@@ -57,6 +61,7 @@ namespace RecSystem.Controllers
 
         [HttpPost]
         [Route("AddScore")]
+        [Authorize]
         public async Task<IActionResult> AddScore(FilmUserViewModel filmViewModel)
         {
             var rating = await _db.Ratings.FirstOrDefaultAsync(x => x.CustomerId == filmViewModel.IdUser && x.ItemID == filmViewModel.ID);
@@ -77,7 +82,7 @@ namespace RecSystem.Controllers
                 rating.Score = filmViewModel.ScoreUser;
                 _db.SaveChanges();
             }
-            _cache.Remove("RecommendIdItemList");
+            _cache.Remove(String.Concat("RecommendIdItemList", filmViewModel.IdUser));
 
             return RedirectToAction("Details", new { id = filmViewModel.ID });
         }

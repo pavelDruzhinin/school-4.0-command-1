@@ -10,6 +10,7 @@ namespace RecSystem.ViewModels
     {
         public int ScoreUser { get; set; }
         public string IdUser { get; set; }
+        public double ScoreAverage { get; set; } 
 
         public FilmUserViewModel() { }
     }

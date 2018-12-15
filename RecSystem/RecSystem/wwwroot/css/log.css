@@ -1,0 +1,60 @@
+﻿.account_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+hr {
+    margin-bottom: 50px;
+}
+
+.log_content {
+    margin-top: 50px;
+    width: 600px;
+    background-color: rgba(0, 0, 0, 0.63);
+    border-radius: 10px;
+}
+
+.input_container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.input_container input {
+    border: 5px solid #ECD4A0;
+    border-radius: 10px;
+}
+
+.label {
+    min-width: 140px;
+    margin-top: 5px;
+}
+
+.checkbox_container {
+    margin-left: 135px;
+    margin-top: 20px;
+}
+
+.checkbox {
+    margin-left: 0;
+}
+
+.button_container {
+    margin: 30px;
+    margin-left: 135px;
+}
+
+.button_container button {
+    padding: 5px 10px;
+    background-color: transparent;
+    color: white;
+}
+
+span {
+    margin-left: 140px;
+    color: red;
+}

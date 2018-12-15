@@ -4,13 +4,13 @@
     ViewData["Title"] = @Html.DisplayFor(model => model.MovieTitle);
 }
 
-<link href="~/css/SelectedFilm.css" rel="stylesheet" type="text/css" />
+<link href="~/css/SelectFilm.css" rel="stylesheet" type="text/css" />
 
 <div class="content" style="justify-content:flex-start">
     <div class="movie_container">
         <div class="movie_image">
             <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="200" height="280">
-            <div class="current_score">Средняя оценка: ScoreAverage</div>
+            <div class="current_score">Средняя оценка: @Html.DisplayFor(model => model.ScoreAverage)</div>
             <div class="current_score">Ваша оценка: @Html.DisplayFor(model => model.ScoreUser)</div>
             <div class="score">
                 <form method="post" asp-action="AddScore">
@@ -30,9 +30,15 @@
         </div>
         <div class="movie_info">
             <div class="movie_header"><h2>@Html.DisplayFor(model => model.MovieTitle)</h2></div>
-            <div class="movie_extra_info"><p>Дата выхода: @Html.DisplayFor(model => model.ReleaseDate)</p></div>
-            <p>Описание</p>
-            <p>Длинное описание</p>
+            <div class="movie_extra_info">@Html.DisplayFor(model => model.ReleaseDate)</div>
+            <div class="movie_description"> 
+                <p>Описание:</p>
+                <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, quaerat, reiciendis. 
+                    Harum expedita libero temporibus atque suscipit maiores voluptatibus, illum molestias. Nesciunt unde, 
+                    obcaecati itaque, enim nisi voluptatum quisquam laudantium!</span><span>Quos error qui quae, natus cumque! Blanditiis, 
+                    quam, quasi impedit omnis voluptatibus vel, exercitationem soluta non et dolorum tenetur iste nemo ipsa laborum architecto 
+                    dolor optio natus qui. Explicabo, quam?</span></p>
+            </div>
         </div>
     </div>
 </div>

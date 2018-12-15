@@ -37,7 +37,12 @@ namespace RecSystem.Data.Import
                 new Item() {MovieTitle = "Just My Luck"},
                 new Item() {MovieTitle = "Superman Returns"},
                 new Item() {MovieTitle = "You, Me and Dupree"},
-                new Item() {MovieTitle = "The Night Listener"}
+                new Item() {MovieTitle = "The Night Listener"},
+                new Item() {MovieTitle = "Lady"},
+                new Item() {MovieTitle = "Plane"},
+                new Item() {MovieTitle = "Luck"},
+                new Item() {MovieTitle = "Superman"},
+                new Item() {MovieTitle = "You"}
             };
             _db.AddRange(ItemsList);
             _db.SaveChanges();
