@@ -19,7 +19,7 @@ namespace RecSystem.Controllers
         private readonly IMemoryCache _cache;
         private UserManager<Customer> _userManager { get; set; }
 
-        public RecommendController(Services.RecommendService recService, ApplicationDbContext db, 
+        public RecommendController(Services.RecommendService recService, ApplicationDbContext db,
             IMemoryCache memoryCache, UserManager<Customer> userManager)
         {
             _recService = recService;

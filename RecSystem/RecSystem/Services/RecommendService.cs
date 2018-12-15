@@ -100,7 +100,7 @@ namespace RecSystem.Services
                 }
             }
 
-            foreach (var item in recomendationsDict.OrderByDescending(x => x.Value))
+            foreach (var item in recomendationsDict.OrderByDescending(x => x.Value).Take(30))
             {
                 recomendationsList.Add(item.Key);
             }
@@ -137,7 +137,7 @@ namespace RecSystem.Services
                 }
             }
 
-            if (n < 4)
+            if (n < 5)
             {
                 return 0;
             }
@@ -148,11 +148,11 @@ namespace RecSystem.Services
 
             double R = Cxy / (Math.Sqrt(Cx * Cy));
 
-            double m = Math.Sqrt((1 - Math.Pow(R, 2)) / (n - 2));
-            if ((R / m) < 2)
+            /*double m = Math.Sqrt((1 - Math.Pow(R, 2)) / (n - 2));
+            if ((R / m) < 3)
             {
                 return 0;
-            }
+            }*/
 
             return R;
         }
