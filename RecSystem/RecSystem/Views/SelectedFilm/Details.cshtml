@@ -1,4 +1,8 @@
-﻿@model RecSystem.ViewModels.FilmUserViewModel
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Customer> SignInManager
+
+@model RecSystem.ViewModels.FilmUserViewModel
 
 @{
     ViewData["Title"] = @Html.DisplayFor(model => model.MovieTitle);
@@ -18,32 +22,41 @@
                     <td><div class="current_score">Your score: @Html.DisplayFor(model => model.ScoreUser)</div></td>
                 </tr>
             </table>
-            <div class="score">
-                <form method="post" asp-action="AddScore">
-                    <p>Score the movie:</p>
-                    @Html.HiddenFor(model => model.ID)
-                    @Html.HiddenFor(model => model.IdUser)
-                    <input class="score_choice" type="radio" name="ScoreUser" value="1">1
-                    <input class="score_choice" type="radio" name="ScoreUser" value="2">2
-                    <input class="score_choice" type="radio" name="ScoreUser" value="3">3
-                    <input class="score_choice" type="radio" name="ScoreUser" value="4">4
-                    <input class="score_choice" type="radio" name="ScoreUser" value="5">5
-                    <div>
-                        <button class="submit_button" type="submit">score</button>
-                    </div>
-                </form>
-            </div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="score">
+                    <form method="post" asp-action="AddScore">
+                        <p>Score the movie:</p>
+                        @Html.HiddenFor(model => model.ID)
+                        @Html.HiddenFor(model => model.IdUser)
+                        <input class="score_choice" type="radio" name="ScoreUser" value="1">1
+                        <input class="score_choice" type="radio" name="ScoreUser" value="2">2
+                        <input class="score_choice" type="radio" name="ScoreUser" value="3">3
+                        <input class="score_choice" type="radio" name="ScoreUser" value="4">4
+                        <input class="score_choice" type="radio" name="ScoreUser" value="5">5
+                        <div>
+                            <button class="submit_button" type="submit">score</button>
+                        </div>
+                    </form>
+                </div>
+            }
         </div>
         <div class="movie_info">
             <div class="movie_header"><h2>@Html.DisplayFor(model => model.MovieTitle)</h2></div>
             <div class="movie_extra_info">Release date: @Html.DisplayFor(model => model.ReleaseDate)</div>
-            <div class="movie_description"> 
+            <div class="movie_description">
                 <p>Description:</p>
-                <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, quaerat, reiciendis. 
-                    Harum expedita libero temporibus atque suscipit maiores voluptatibus, illum molestias. Nesciunt unde, 
-                    obcaecati itaque, enim nisi voluptatum quisquam laudantium!</span><span>Quos error qui quae, natus cumque! Blanditiis, 
-                    quam, quasi impedit omnis voluptatibus vel, exercitationem soluta non et dolorum tenetur iste nemo ipsa laborum architecto 
-                    dolor optio natus qui. Explicabo, quam?</span></p>
+                <p>
+                    <span>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, quaerat, reiciendis.
+                        Harum expedita libero temporibus atque suscipit maiores voluptatibus, illum molestias. Nesciunt unde,
+                        obcaecati itaque, enim nisi voluptatum quisquam laudantium!
+                    </span><span>
+                        Quos error qui quae, natus cumque! Blanditiis,
+                        quam, quasi impedit omnis voluptatibus vel, exercitationem soluta non et dolorum tenetur iste nemo ipsa laborum architecto
+                        dolor optio natus qui. Explicabo, quam?
+                    </span>
+                </p>
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@ namespace RecSystem.Controllers
 
         [HttpGet]
         [Route("Details/{id:int}")]
-        [Authorize]
+
         public async Task<IActionResult> Details(int id)
         {
             var item = await _db.Items.FirstOrDefaultAsync(m => m.ID == id);
