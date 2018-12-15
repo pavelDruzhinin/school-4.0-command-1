@@ -82,7 +82,7 @@ namespace RecSystem.Controllers
                 rating.Score = filmViewModel.ScoreUser;
                 _db.SaveChanges();
             }
-            _cache.Remove("RecommendIdItemList");
+            _cache.Remove(String.Concat("RecommendIdItemList", filmViewModel.IdUser));
 
             return RedirectToAction("Details", new { id = filmViewModel.ID });
         }

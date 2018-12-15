@@ -1,4 +1,6 @@
-﻿@model IEnumerable<RecSystem.Models.Rating>
+﻿@using RecSystem.ViewModels
+@model RatedFilmsViewModel
+
 @{
     ViewData["Title"] = "Оцененные";
 }
@@ -7,59 +9,36 @@
 <link href="~/css/scored.css" rel="stylesheet" type="text/css" />
 
 <div class="content">
-
-    @foreach (var item in Model)
+    @if (Model.IsVisibleTable)
     {
-        <div class="movie_container">
-            <div class="movie_image">
-                <a asp-controller="Film" asp-action="Details" asp-route-id="@item.Item.ID">
-                    <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="130" height="180"> </a>
+        @foreach (var item in Model.RatedFilmList)
+        {
+            <div class="movie_container">
+                <div class="movie_image">
+                    <a asp-controller="Film" asp-action="Details" asp-route-id="@item.Item.ID">
+                        <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="130" height="180">
+                    </a>
                     <div class="current_score">Ваша оценка: @Html.DisplayFor(modelItem => item.Score)</div>
-            </div>
-            <div class="movie_info">
-                <div class="movie_header">
-                    <h2>
-                        <a asp-controller="Film" asp-action="Details" asp-route-id="@item.Item.ID">
-                            @Html.DisplayFor(modelItem => item.Item.MovieTitle)
-                         </a>
-                    </h2>
                 </div>
-                <div class="movie_extra_info">
-                    <p>
-                        @Html.DisplayFor(modelItem => item.Item.ReleaseDate)<br>
-                    </p>
+                <div class="movie_info">
+                    <div class="movie_header">
+                        <h2>
+                            <a asp-controller="Film" asp-action="Details" asp-route-id="@item.Item.ID">
+                                @Html.DisplayFor(modelItem => item.Item.MovieTitle)
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="movie_extra_info">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Item.ReleaseDate)<br>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+    }
+    else
+    {
+        <h3>@Model.MessageUser</h3>
     }
 </div>
-
-
-@*<div class="md-t-1">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Название</th>
-                <th>Оценка</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Item.MovieTitle)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Score)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>*@
-
-
-@*<a asp-controller="Film" asp-action="Details" asp-route-id="@m.ID">*@
-
-@*<a asp-controller="Film" asp-action="Details" asp-route-id="@m.ID">@m.MovieTitle</a>*@

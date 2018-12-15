@@ -23,7 +23,7 @@ namespace RecSystem.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            int pageSize = 4; 
+            int pageSize = 30; 
 
             IQueryable<Item> source = _context.Items;
             var count = await source.CountAsync();
