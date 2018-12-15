@@ -2,13 +2,25 @@
 using FileHelpers;
 using System;
 using System.Collections.Generic;
+using RecSystem.Data;
+using System.Linq;
 
 namespace RecSystem.Models
 {
     public class IdentityDataInit
+
     {
+        private readonly ApplicationDbContext _context;
+
+        public IdentityDataInit(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public List<string> SeedUsers(UserManager<Customer> userManager)
         {
+            if (_context.Customers.Any())
+                return new List<string>();
+
             List<string> usersId = new List<string>();
             try
             {
@@ -23,7 +35,7 @@ namespace RecSystem.Models
                         Customer user = new Customer();
                         {
 
-                            user.UserName = record.name;
+                            user.UserName = record.email;
                             user.Name = record.name;
                             user.Email = record.email;
 

@@ -97,6 +97,7 @@ namespace RecSystem.Models
                 return;
             //user id | item id | rating | timestamp. time stamps are unix seconds since 1 / 1 / 1970 UTC
             var engine = new FileHelperEngine<RatingTable>();
+            var toAdd = new List<Rating>();
             var ratingStr = engine.ReadFile("u.data");
             for (var i = 1; i <= usersId.Count; i++)
             {
@@ -108,10 +109,12 @@ namespace RecSystem.Models
                         rating.CustomerId = usersId[i - 1];
                         rating.ItemID = str.item_id;
                     }
-                    _context.Ratings.Add(rating);
+                    toAdd.Add(rating);
+                    //_context.Ratings.Add(rating);
 
                 }
             }
+            _context.AddRange(toAdd);
             _context.SaveChanges();
 
         }
