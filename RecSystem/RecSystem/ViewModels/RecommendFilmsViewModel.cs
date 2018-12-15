@@ -6,22 +6,19 @@ using System.Threading.Tasks;
 
 namespace RecSystem.ViewModels
 {
-    public class RecommendFilmsViewModel
+    public class RecommendFilmsViewModel : MessageViewModel
     {
         public List<Item> RecommendFilmList { get; set; }
-        public string MessageUser { get; set; }
-        public bool VisibleTable { get; set; }
 
-        public RecommendFilmsViewModel() { }
         public RecommendFilmsViewModel(List<Item> recommendIdItemList)
         {
             RecommendFilmList = recommendIdItemList;
             if (recommendIdItemList.Count() == 0)
             {
-                MessageUser = @"Для расчета рекомендаций необходимо, чтобы Вы оценили большее количество фильмов!";
-                VisibleTable = false;
+                MessageUser = @"Для расчета рекомендаций необходимо оценить большее количество фильмов";
+                IsVisibleTable = false;
             }
-            else VisibleTable = true;
+            else IsVisibleTable = true;
         }
     }
 }

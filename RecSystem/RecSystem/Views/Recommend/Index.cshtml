@@ -6,12 +6,10 @@
 }
 <link href="~/css/MainPage.css" rel="stylesheet" type="text/css" />
 
-<h2>@Model.MessageUser</h2>
+<div class="content">
 
-@if (Model.VisibleTable)
-{
-    <div class="content">
-
+    @if (Model.IsVisibleTable)
+    {
         @foreach (var m in Model.RecommendFilmList)
         {
             <div class="movie_container">
@@ -34,5 +32,9 @@
                 </div>
             </div>
         }
-    </div>
-}
+    }
+    else
+    {
+        <h3>@Model.MessageUser</h3>
+    }
+</div>
