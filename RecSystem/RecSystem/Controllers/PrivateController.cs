@@ -24,10 +24,29 @@ namespace RecSystem.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //List<object> result = new List<object>();
+            //List<string> result = new List<string>();
             var query = await _context.Ratings
                                       .Include(x => x.Item)
                                       .Where(x => x.CustomerId == userId)
+                                      //.Select(x => new
+                                      //{
+                                      //    Title = x.Item.MovieTitle,
+                                      //    Rating = x.Score
+                                      //})
+                                      //.Select(x => x.Item.MovieTitle ; x=> x.Rating)
                                       .ToListAsync();
+            //foreach (var i in query) {
+            //    result.Add(i);
+
+            //}
+            
+            ////string result = "";
+            ////foreach (var x in query)
+            ////    result += $"{x.Title} , {x.Rating} \n";
+                
+            
+
             return View(new RatedFilmsViewModel(query));
         }
     }

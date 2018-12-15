@@ -12,7 +12,7 @@
             <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="200" height="280">
             <table>
                 <tr>
-                    <td><div class="average_score">Average score: 3</div></td>
+                    <td><div class="average_score">Average score: @Html.DisplayFor(model => model.ScoreAverage)</div></td>
                 </tr>
                 <tr>
                     <td><div class="current_score">Your score: @Html.DisplayFor(model => model.ScoreUser)</div></td>

@@ -53,7 +53,7 @@ namespace RecSystem.Controllers
                 Url = item.Url,
                 ScoreUser = (rating != null) ? rating.Score : 0,
                 IdUser = userId,
-                ScoreAverage = (ratingAllUser.Count() != 0) ? Math.Round(ratingAllUser.Average(x => x.Score), 1) : 0
+                ScoreAverage = (ratingAllUser.Count() != 0) ? Math.Round(ratingAllUser.Average(x => x.Score), 2) : 0
             };
 
             return View(filmViewModel);

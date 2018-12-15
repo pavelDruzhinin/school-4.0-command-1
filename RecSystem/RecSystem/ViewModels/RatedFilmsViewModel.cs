@@ -8,6 +8,8 @@ namespace RecSystem.ViewModels
 {
     public class RatedFilmsViewModel : MessageViewModel
     {
+       
+
         public List<Rating> RatedFilmList { get; set; }
 
         public RatedFilmsViewModel(List<Rating> ratedFilmList)
@@ -20,5 +22,6 @@ namespace RecSystem.ViewModels
             }
             else IsVisibleTable = true;
         }
+
     }
 }
