@@ -9,6 +9,7 @@
     margin-left: 1%;
     margin-right: 1%;
     box-sizing: border-box;
+    padding-right:2%;
 }
 
 .movie_image {
@@ -42,22 +43,3 @@
 .movie_pagin_down, .movie_pagin_up {
     margin:0 25px;
 }
-
-
-/*.movie_pagin_up {
-    display: flex;
-    font-family: sans-serif;
-    color: white;
-    margin-right: 4%;
-    width: 44%;
-}
-
-.movie_pagin_down {
-    display: flex;
-    font-family: sans-serif;
-    color: white;
-    margin-left: 1%;
-    margin-right: 1%;
-}*/
-
-

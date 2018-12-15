@@ -8,8 +8,13 @@
     box-sizing: border-box;
 }
 
-.current_score {
+table, table td {
+    border: 3px solid white;
+}
+
+.current_score, .average_score {
     margin: 10px 20px;
+    text-align: center;
 }
 
 .score {
