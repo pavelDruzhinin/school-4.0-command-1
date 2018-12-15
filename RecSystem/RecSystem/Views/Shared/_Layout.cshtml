@@ -31,15 +31,15 @@
                           method="post"
                           id="logoutForm" class="navbar-right">
                         <ul class="navbar_menu">
-                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Main")">Главная</a></li>
-                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Private")">Оцененные</a></li>
-                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Recommend")">Рекомендации</a></li>
+                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Main")">Main</a></li>
+                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Private")">Scored</a></li>
+                            <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Recommend")">Recommendations</a></li>
                             <li class="autorization_login">
                                 @*<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result.Name</a>*@
                                 @UserManager.GetUserAsync(User).Result.Name
                             </li>
                             <li class="logout">
-                                <button type="submit" class="btn-link">Выход</button>
+                                <button type="submit" class="btn-link">Log out</button>
                             </li>
                         </ul>
                     </form>
@@ -47,9 +47,9 @@
                 else
                 {
                     <ul class="navbar_menu">
-                        <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Main")">Главная</a></li>
-                        <li class="autorization_login"><a asp-area="Identity" asp-page="/Account/Login">Вход</a></li>
-                        <li class="registration"><a asp-area="Identity" asp-page="/Account/Register">Регистрация</a></li>
+                        <li class="navbar_menu_item"><a class="navbar_item_link" href="@Url.Action("Index", "Main")">Main</a></li>
+                        <li class="autorization_login"><a asp-area="Identity" asp-page="/Account/Login">Log in</a></li>
+                        <li class="registration"><a asp-area="Identity" asp-page="/Account/Register">Registration</a></li>
                     </ul>
                 }
 

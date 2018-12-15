@@ -15,7 +15,7 @@ namespace RecSystem.ViewModels
             RecommendFilmList = recommendIdItemList;
             if (recommendIdItemList.Count() == 0)
             {
-                MessageUser = @"Для расчета рекомендаций необходимо оценить большее количество фильмов";
+                MessageUser = @"You have to score more movies to get recommendations.";
                 IsVisibleTable = false;
             }
             else IsVisibleTable = true;

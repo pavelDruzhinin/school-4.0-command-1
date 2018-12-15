@@ -12,15 +12,15 @@
             <img src="~/images/The_Neon_Demon.jpg" alt="movie_img" width="200" height="280">
             <table>
                 <tr>
-                    <td><div class="average_score">Средняя оценка: 3</div></td>
+                    <td><div class="average_score">Average score: 3</div></td>
                 </tr>
                 <tr>
-                    <td><div class="current_score">Ваша оценка: @Html.DisplayFor(model => model.ScoreUser)</div></td>
+                    <td><div class="current_score">Your score: @Html.DisplayFor(model => model.ScoreUser)</div></td>
                 </tr>
             </table>
             <div class="score">
                 <form method="post" asp-action="AddScore">
-                    <p>Оцените фильм:</p>
+                    <p>Score the movie:</p>
                     @Html.HiddenFor(model => model.ID)
                     @Html.HiddenFor(model => model.IdUser)
                     <input class="score_choice" type="radio" name="ScoreUser" value="1">1
@@ -29,16 +29,16 @@
                     <input class="score_choice" type="radio" name="ScoreUser" value="4">4
                     <input class="score_choice" type="radio" name="ScoreUser" value="5">5
                     <div>
-                        <button class="submit_button" type="submit">Оценить</button>
+                        <button class="submit_button" type="submit">score</button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="movie_info">
             <div class="movie_header"><h2>@Html.DisplayFor(model => model.MovieTitle)</h2></div>
-            <div class="movie_extra_info">@Html.DisplayFor(model => model.ReleaseDate)</div>
+            <div class="movie_extra_info">Release date: @Html.DisplayFor(model => model.ReleaseDate)</div>
             <div class="movie_description"> 
-                <p>Описание:</p>
+                <p>Description:</p>
                 <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, quaerat, reiciendis. 
                     Harum expedita libero temporibus atque suscipit maiores voluptatibus, illum molestias. Nesciunt unde, 
                     obcaecati itaque, enim nisi voluptatum quisquam laudantium!</span><span>Quos error qui quae, natus cumque! Blanditiis, 

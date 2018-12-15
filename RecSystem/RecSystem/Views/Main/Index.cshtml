@@ -1,7 +1,7 @@
 ﻿@using RecSystem.ViewModels
 @model IndexViewModel
 @{
-    ViewData["Title"] = "Главная";
+    ViewData["Title"] = "Main";
 }
 <link href="~/css/MainPage.css" rel="stylesheet" type="text/css" />
 
@@ -23,7 +23,7 @@
                 </div>
                 <div class="movie_extra_info">
                     <p>
-                       Дата выхода: @m.ReleaseDate<br>
+                       Release date: @m.ReleaseDate<br>
                     </p>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             <a asp-action="Index"
                asp-route-page="@(Model.PageViewModel.PageNumber - 1)">               
                 <h3>
-                    < Назад
+                    < Prev
                 </h3>
             </a>
         }
@@ -49,7 +49,7 @@
             <a asp-action="Index"
                asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
                 <h3>
-                    Далее >
+                    Next >
                 </h3>
             </a>
         }

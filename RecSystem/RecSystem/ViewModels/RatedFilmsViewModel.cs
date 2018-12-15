@@ -15,7 +15,7 @@ namespace RecSystem.ViewModels
             RatedFilmList = ratedFilmList;
             if (ratedFilmList.Count() == 0)
             {
-                MessageUser = @"Вы пока не оценили ни одного фильма";
+                MessageUser = @"You haven't scored any movie yet.";
                 IsVisibleTable = false;
             }
             else IsVisibleTable = true;
