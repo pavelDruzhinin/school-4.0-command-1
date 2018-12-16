@@ -27,9 +27,12 @@
                     </h2>
                 </div>
                 <div class="movie_extra_info">
-                    <p>
-                       Release date: @m.ReleaseDate<br>
-                    </p>
+                    @if (@m.ReleaseDate != null)
+                    {
+                        <p>
+                            Release date: @m.ReleaseDate.Value.ToString("dd.MM.yyyy") <br>
+                        </p>
+                    }
                 </div>
             </div>
         </div>
@@ -41,7 +44,7 @@
         @if (Model.PageViewModel.HasPreviousPage)
         {
             <a asp-action="Index"
-               asp-route-page="@(Model.PageViewModel.PageNumber - 1)">               
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)">
                 <h3>
                     < Prev
                 </h3>
