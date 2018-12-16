@@ -33,9 +33,18 @@
                     </h2>
                 </div>
                 <div class="movie_extra_info">
+<<<<<<< HEAD
                     <p>
                         Release date: @m.ReleaseDate<br>
                     </p>
+=======
+                    @if (@m.ReleaseDate != null)
+                    {
+                        <p>
+                            Release date: @m.ReleaseDate.Value.ToString("dd.MM.yyyy") <br>
+                        </p>
+                    }
+>>>>>>> 4f8356b883e9c79d058e5a465d535cf7e03991b6
                 </div>
             </div>
         </div>

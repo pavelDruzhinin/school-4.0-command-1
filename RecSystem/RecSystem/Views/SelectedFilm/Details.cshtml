@@ -43,7 +43,14 @@
         </div>
         <div class="movie_info">
             <div class="movie_header"><h2>@Html.DisplayFor(model => model.MovieTitle)</h2></div>
-            <div class="movie_extra_info">Release date: @Html.DisplayFor(model => model.ReleaseDate)</div>
+            <div class="movie_extra_info">
+                @if (@Model.ReleaseDate != null)
+                {
+                    <p>
+                        Release date: @Model.ReleaseDate.Value.ToString("dd.MM.yyyy") <br>
+                    </p>
+                }
+                    </div>
             <div class="movie_description">
                 <p>Description:</p>
                 <p>
