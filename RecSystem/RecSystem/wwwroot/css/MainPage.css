@@ -11,6 +11,9 @@
     box-sizing: border-box;
     padding-right:2%;
 }
+#search{
+    margin-left: 5%;
+}
 
 .movie_image {
     margin-right: 5%;
