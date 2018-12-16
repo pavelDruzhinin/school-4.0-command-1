@@ -1,0 +1,25 @@
+﻿.search_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.search_container {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.63);
+    width: 500px;
+}
+
+.search_input {
+    border: 5px solid #ECD4A0;
+    border-radius: 10px;
+}
+
+.submit_button {
+    margin-left:10px;
+    padding: 5px 10px;
+    background-color: transparent;
+    color: white;
+}

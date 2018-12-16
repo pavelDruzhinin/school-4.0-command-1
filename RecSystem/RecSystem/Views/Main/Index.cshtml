@@ -4,12 +4,18 @@
     ViewData["Title"] = "Main";
 }
 <link href="~/css/MainPage.css" rel="stylesheet" type="text/css" />
-<form asp-controller="Main" asp-action="Index" class="movie_container" id="search">
-    <p>
-        Title: <input type="text" class="movie_extra_info" name="SearchString">
-        <input class="submit_button" type="submit" value="Search" />
-    </p>
-</form>
+<link href="~/css/Search.css" rel="stylesheet" type="text/css" />
+
+<div class="search_wrapper">
+    <div class="search_container">
+        <form asp-controller="Main" asp-action="Index" id="search">
+            <span>Enter a title:</span>
+            <input class="search_input" type="text" name="SearchString">
+            <input class="submit_button" type="submit" value="Search" />
+        </form>
+    </div>
+</div>
+
 <div class="content">
 
     @foreach (var m in Model.Items)
@@ -28,7 +34,7 @@
                 </div>
                 <div class="movie_extra_info">
                     <p>
-                       Release date: @m.ReleaseDate<br>
+                        Release date: @m.ReleaseDate<br>
                     </p>
                 </div>
             </div>
@@ -41,7 +47,7 @@
         @if (Model.PageViewModel.HasPreviousPage)
         {
             <a asp-action="Index"
-               asp-route-page="@(Model.PageViewModel.PageNumber - 1)">               
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)">
                 <h3>
                     < Prev
                 </h3>
