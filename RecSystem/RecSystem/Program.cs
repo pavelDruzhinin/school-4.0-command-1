@@ -21,4 +21,4 @@ namespace RecSystem
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
-}
+} 
